@@ -396,6 +396,9 @@
     cursor:pointer; transition:0.25s;
   }
   form button:hover{background:var(--gold-light);}
+  form button:disabled, .admin-save-bar button:disabled{
+    opacity:0.5; cursor:not-allowed; background:var(--gold);
+  }
 
   footer{
     text-align:center; padding:40px 6% 30px;

@@ -184,10 +184,16 @@ function wireAdminSaveBar() {
   document.getElementById("saveContentBtn").addEventListener("click", saveSiteContent);
 }
 
+let siteSaveInFlight = false;
+
 async function saveSiteContent() {
+  if (siteSaveInFlight) return;
   ensureGithubToken();
   if (!getGithubToken()) return;
   const status = document.getElementById("adminSaveStatus");
+  const saveBtn = document.getElementById("saveContentBtn");
+  siteSaveInFlight = true;
+  saveBtn.disabled = true;
   status.textContent = "Enregistrement...";
   try {
     const { sha } = await ghGetFile("content/site.json");
@@ -198,6 +204,9 @@ async function saveSiteContent() {
     }, 2500);
   } catch (err) {
     status.textContent = "Erreur : " + err.message;
+  } finally {
+    siteSaveInFlight = false;
+    saveBtn.disabled = false;
   }
 }
 
@@ -554,65 +563,79 @@ async function uploadImageFiles(fileInput, prefix, status) {
   return uploaded;
 }
 
+let listingSubmitInFlight = false;
+
 async function handleListingSubmit(e) {
   e.preventDefault();
+  if (listingSubmitInFlight) return;
   ensureGithubToken();
   if (!getGithubToken()) return;
 
-  const existingId = document.getElementById("lf-id").value;
-  const isNew = !existingId;
-  const title = document.getElementById("lf-title").value.trim();
-  const id = existingId || `${slugify(title) || "bien"}-${Date.now().toString(36)}`;
+  const submitBtn = document.querySelector("#listingForm button[type='submit']");
+  listingSubmitInFlight = true;
+  submitBtn.disabled = true;
+  const originalBtnText = submitBtn.textContent;
 
   const status = document.getElementById("listingFormStatus");
   status.textContent = "";
 
-  const urlImages = document
-    .getElementById("lf-images")
-    .value.split("\n")
-    .map((s) => s.trim())
-    .filter(Boolean);
-
-  let uploadedImages = [];
   try {
-    uploadedImages = await uploadImageFiles(document.getElementById("lf-image-files"), id, status);
-  } catch (err) {
-    status.textContent = "Erreur d'envoi des photos : " + err.message;
-    return;
-  }
+    const existingId = document.getElementById("lf-id").value;
+    const isNew = !existingId;
+    const title = document.getElementById("lf-title").value.trim();
+    const id = existingId || `${slugify(title) || "bien"}-${Date.now().toString(36)}`;
 
-  const transaction = document.getElementById("lf-transaction").value;
-  const priceRentVal = document.getElementById("lf-price-rent").value;
-  const priceSaleVal = document.getElementById("lf-price-sale").value;
+    const urlImages = document
+      .getElementById("lf-images")
+      .value.split("\n")
+      .map((s) => s.trim())
+      .filter(Boolean);
 
-  const newItem = {
-    id,
-    category: document.getElementById("lf-category").value,
-    transaction,
-    title,
-    priceRent: transaction !== "Vente" && priceRentVal ? Number(priceRentVal) : null,
-    priceSale: transaction !== "Location" && priceSaleVal ? Number(priceSaleVal) : null,
-    pieces: document.getElementById("lf-pieces").value.trim(),
-    sdb: document.getElementById("lf-sdb").value.trim(),
-    desc: document.getElementById("lf-desc").value.trim(),
-    images: [...uploadedImages, ...urlImages],
-  };
+    let uploadedImages = [];
+    try {
+      uploadedImages = await uploadImageFiles(document.getElementById("lf-image-files"), id, status);
+    } catch (err) {
+      status.textContent = "Erreur d'envoi des photos : " + err.message;
+      return;
+    }
 
-  status.textContent = "Enregistrement en cours...";
+    const transaction = document.getElementById("lf-transaction").value;
+    const priceRentVal = document.getElementById("lf-price-rent").value;
+    const priceSaleVal = document.getElementById("lf-price-sale").value;
 
-  try {
-    const { sha, json } = await ghGetFile("content/listings.json");
-    const items = json.items || [];
-    const updatedItems = isNew ? [...items, newItem] : items.map((it) => (it.id === id ? newItem : it));
-    const message = isNew ? `Ajout du bien "${newItem.title}"` : `Modification du bien "${newItem.title}"`;
-    await ghPutFile("content/listings.json", { items: updatedItems }, message, sha);
-    LISTINGS = updatedItems;
-    renderFilters();
-    renderGrid();
-    document.getElementById("listingFormModal").classList.remove("open");
-    status.textContent = "";
-  } catch (err) {
-    status.textContent = "Erreur : " + err.message;
+    const newItem = {
+      id,
+      category: document.getElementById("lf-category").value,
+      transaction,
+      title,
+      priceRent: transaction !== "Vente" && priceRentVal ? Number(priceRentVal) : null,
+      priceSale: transaction !== "Location" && priceSaleVal ? Number(priceSaleVal) : null,
+      pieces: document.getElementById("lf-pieces").value.trim(),
+      sdb: document.getElementById("lf-sdb").value.trim(),
+      desc: document.getElementById("lf-desc").value.trim(),
+      images: [...uploadedImages, ...urlImages],
+    };
+
+    status.textContent = "Enregistrement en cours...";
+
+    try {
+      const { sha, json } = await ghGetFile("content/listings.json");
+      const items = json.items || [];
+      const updatedItems = isNew ? [...items, newItem] : items.map((it) => (it.id === id ? newItem : it));
+      const message = isNew ? `Ajout du bien "${newItem.title}"` : `Modification du bien "${newItem.title}"`;
+      await ghPutFile("content/listings.json", { items: updatedItems }, message, sha);
+      LISTINGS = updatedItems;
+      renderFilters();
+      renderGrid();
+      document.getElementById("listingFormModal").classList.remove("open");
+      status.textContent = "";
+    } catch (err) {
+      status.textContent = "Erreur : " + err.message;
+    }
+  } finally {
+    listingSubmitInFlight = false;
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalBtnText;
   }
 }
 
