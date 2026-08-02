@@ -420,18 +420,6 @@
       ]
     },
     {
-      "id": "garage-4",
-      "category": "Garage",
-      "transaction": "Location",
-      "title": "Garage 4",
-      "priceRent": 1000,
-      "priceSale": null,
-      "pieces": "1",
-      "sdb": "",
-      "desc": "Un espace sécurisé pour vos véhicules. Description complète à venir.",
-      "images": []
-    },
-    {
       "id": "garage-5",
       "category": "Garage",
       "transaction": "Location",
