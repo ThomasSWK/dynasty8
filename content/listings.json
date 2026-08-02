@@ -88,21 +88,21 @@
       "id": "apartment-exec-regal-a",
       "category": "Appartement",
       "transaction": "Location",
-      "title": "Apartment Exec Regal A",
+      "title": "REGAL",
       "priceRent": 1000,
       "priceSale": null,
       "pieces": "1",
-      "sdb": "",
-      "desc": "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+      "sdb": "1",
+      "desc": "Le violet s’impose avec audace dans cet intérieur théâtral et raffiné. Entre bois sombre, éclairages travaillés et décoration originale, la gamme REGAL assume pleinement son côté royal — couronne non incluse.",
       "images": [
-        "images/uploads/apartment-exec-regal-a-01.jpg",
         "images/uploads/apartment-exec-regal-a-02.jpg",
         "images/uploads/apartment-exec-regal-a-03.jpg",
         "images/uploads/apartment-exec-regal-a-04.jpg",
         "images/uploads/apartment-exec-regal-a-05.jpg",
         "images/uploads/apartment-exec-regal-a-06.jpg",
         "images/uploads/apartment-exec-regal-a-07.jpg",
-        "images/uploads/apartment-exec-regal-a-08.jpg"
+        "images/uploads/apartment-exec-regal-a-08.jpg",
+        "images/uploads/apartment-exec-regal-a-01.jpg"
       ]
     },
     {
