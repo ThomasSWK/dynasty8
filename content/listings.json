@@ -151,21 +151,21 @@
       "id": "apartment-exec-vibrant-a",
       "category": "Appartement",
       "transaction": "Location",
-      "title": "Apartment Exec Vibrant A",
+      "title": "VIBRANT",
       "priceRent": 1000,
       "priceSale": null,
       "pieces": "1",
-      "sdb": "",
-      "desc": "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+      "sdb": "1",
+      "desc": "Ici, la couleur prend les commandes et elle le fait très bien. Entre les touches pop, les contrastes assumés et l’énergie qui se dégage de chaque pièce, la gamme VIBRANT offre un intérieur vivant, audacieux et plein de caractère — impossible d’y entrer en faisant semblant d’être triste.",
       "images": [
-        "images/uploads/apartment-exec-vibrant-a-01.jpg",
         "images/uploads/apartment-exec-vibrant-a-02.jpg",
         "images/uploads/apartment-exec-vibrant-a-03.jpg",
         "images/uploads/apartment-exec-vibrant-a-04.jpg",
         "images/uploads/apartment-exec-vibrant-a-05.jpg",
         "images/uploads/apartment-exec-vibrant-a-06.jpg",
         "images/uploads/apartment-exec-vibrant-a-07.jpg",
-        "images/uploads/apartment-exec-vibrant-a-08.jpg"
+        "images/uploads/apartment-exec-vibrant-a-08.jpg",
+        "images/uploads/apartment-exec-vibrant-a-01.jpg"
       ]
     },
     {
