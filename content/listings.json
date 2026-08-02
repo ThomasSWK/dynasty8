@@ -20,6 +20,27 @@
         "images/uploads/aqua-msc785sr-msc78i5f-blyew.png",
         "images/uploads/aqua-msc785sr-msc78ka7-06o6t.png"
       ]
+    },
+    {
+      "id": "modern-msc8r7rf",
+      "category": "Appartement",
+      "transaction": "Location et vente",
+      "title": "MODERN",
+      "priceRent": 2200,
+      "priceSale": 350000,
+      "pieces": "2",
+      "sdb": "1",
+      "desc": "Test appartement",
+      "images": [
+        "images/uploads/modern-msc8r7rf-msc8r7s0-hbwp0.png",
+        "images/uploads/modern-msc8r7rf-msc8ra3r-hepgp.png",
+        "images/uploads/modern-msc8r7rf-msc8rby9-4tffj.png",
+        "images/uploads/modern-msc8r7rf-msc8remh-hchoh.png",
+        "images/uploads/modern-msc8r7rf-msc8rgfa-6i4j3.png",
+        "images/uploads/modern-msc8r7rf-msc8riby-x6yxh.png",
+        "images/uploads/modern-msc8r7rf-msc8rk9j-juwhk.png",
+        "images/uploads/modern-msc8r7rf-msc8rm8v-re0hv.png"
+      ]
     }
   ]
 }
