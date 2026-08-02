@@ -36,7 +36,7 @@ Chaque bien dans `content/listings.json` (tableau `items`) a la forme :
 - `category` : `Appartement`, `Maison`, `Entrepôt` ou `Garage` — sert aux filtres de la page.
 - `transaction` : `Location`, `Vente` ou `Location et vente`. Détermine quel(s) champ(s) de prix sont affichés/demandés dans le formulaire admin.
 - `priceRent` (nombre, prix par semaine) et `priceSale` (nombre, prix de vente) — seul le champ pertinent pour la transaction est rempli (l'autre reste `null`). Le site les affiche automatiquement formatés en euros/dollars avec séparateur de milliers, ex. "À partir de 2 400$/semaine" et "À partir de 350 000$".
-- Les photos peuvent être **importées directement depuis votre ordinateur** (le formulaire admin les envoie dans `images/uploads/` du dépôt via l'API GitHub) **ou** être des liens externes (Imgur, Discord CDN, etc.) collés dans le champ "URLs". Les deux méthodes peuvent être combinées sur un même bien.
+- Les photos (tableau `images`, ordre = ordre d'affichage, **la première est la photo de couverture**) peuvent être **importées directement depuis votre ordinateur** (envoyées dans `images/uploads/` du dépôt dès la sélection du fichier) **ou** ajoutées via un lien externe (Imgur, Discord CDN, etc.). Dans le formulaire admin, chaque photo apparaît en vignette et se réorganise par glisser-déposer ou avec les flèches ↑/↓ ; un clic sur ✕ la retire de la liste.
 
 De la même façon, `content/site.json` a un champ `founder` (photo, nom, titre) affiché dans la section "L'agence" — la photo se met à jour depuis le formulaire "Modifier le contenu" (upload ou chemin manuel).
 

@@ -467,11 +467,17 @@ function injectListingFormModal() {
           <label>Description</label>
           <textarea id="lf-desc" rows="3" required></textarea>
 
-          <label>Importer des photos (depuis votre ordinateur)</label>
-          <input type="file" id="lf-image-files" accept="image/*" multiple>
-
-          <label>Ou coller des URLs de photos (une par ligne)</label>
-          <textarea id="lf-images" rows="3" placeholder="https://..."></textarea>
+          <label>Photos (la première est la photo de couverture)</label>
+          <div id="lf-photo-list" class="photo-list"></div>
+          <div class="photo-add-row">
+            <label class="ghost-btn photo-upload-btn">
+              + Importer des photos
+              <input type="file" id="lf-image-files" accept="image/*" multiple hidden>
+            </label>
+            <input type="text" id="lf-image-url-input" placeholder="ou coller une URL de photo">
+            <button type="button" id="lf-image-url-add-btn" class="ghost-btn">Ajouter</button>
+          </div>
+          <p class="admin-status" id="lf-photos-status"></p>
 
           <input type="hidden" id="lf-id">
           <button type="submit">Enregistrer</button>
@@ -494,6 +500,8 @@ function injectListingFormModal() {
   });
   document.getElementById("lf-transaction").addEventListener("change", updatePriceFieldsVisibility);
   document.getElementById("listingForm").addEventListener("submit", handleListingSubmit);
+  document.getElementById("lf-image-files").addEventListener("change", handlePhotoFilesSelected);
+  document.getElementById("lf-image-url-add-btn").addEventListener("click", handleAddPhotoUrl);
 }
 
 function updatePriceFieldsVisibility() {
@@ -520,20 +528,118 @@ function openListingForm(id) {
   document.getElementById("lf-pieces").value = item ? item.pieces : "";
   document.getElementById("lf-sdb").value = item ? item.sdb : "";
   document.getElementById("lf-desc").value = item ? item.desc : "";
-  document.getElementById("lf-images").value = item && item.images ? item.images.join("\n") : "";
   document.getElementById("lf-image-files").value = "";
+  document.getElementById("lf-image-url-input").value = "";
   document.getElementById("listingFormStatus").textContent = "";
+  document.getElementById("lf-photos-status").textContent = "";
+  lfDraftId = id || `bien-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+  lfImages = item && item.images ? [...item.images] : [];
+  renderPhotoList();
   updatePriceFieldsVisibility();
   document.getElementById("listingFormModal").classList.add("open");
 }
 
-function slugify(str) {
-  return str
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+/* ---------- Gestion ordonnée des photos du formulaire ---------- */
+
+let lfImages = [];
+let lfDraftId = null;
+let lfDragIndex = null;
+
+function renderPhotoList() {
+  const el = document.getElementById("lf-photo-list");
+  if (!lfImages.length) {
+    el.innerHTML = `<p class="photo-list-empty">Aucune photo pour le moment.</p>`;
+    return;
+  }
+  el.innerHTML = lfImages
+    .map(
+      (src, i) => `
+    <div class="photo-item" draggable="true" data-index="${i}">
+      <img src="${escapeHtml(src)}" alt="">
+      ${i === 0 ? `<span class="cover-badge">Couverture</span>` : ""}
+      <div class="photo-item-actions">
+        <button type="button" data-action="up" data-index="${i}" ${i === 0 ? "disabled" : ""} title="Monter">↑</button>
+        <button type="button" data-action="down" data-index="${i}" ${i === lfImages.length - 1 ? "disabled" : ""} title="Descendre">↓</button>
+        <button type="button" data-action="remove" data-index="${i}" class="danger" title="Supprimer">✕</button>
+      </div>
+    </div>`
+    )
+    .join("");
+
+  el.querySelectorAll("button[data-action]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const i = Number(btn.dataset.index);
+      if (btn.dataset.action === "up") movePhoto(i, -1);
+      else if (btn.dataset.action === "down") movePhoto(i, 1);
+      else if (btn.dataset.action === "remove") removePhoto(i);
+    });
+  });
+
+  el.querySelectorAll(".photo-item").forEach((node) => {
+    node.addEventListener("dragstart", () => {
+      lfDragIndex = Number(node.dataset.index);
+      node.classList.add("dragging");
+    });
+    node.addEventListener("dragend", () => {
+      node.classList.remove("dragging");
+      lfDragIndex = null;
+    });
+    node.addEventListener("dragover", (e) => e.preventDefault());
+    node.addEventListener("drop", (e) => {
+      e.preventDefault();
+      const targetIndex = Number(node.dataset.index);
+      if (lfDragIndex === null || lfDragIndex === targetIndex) return;
+      const [moved] = lfImages.splice(lfDragIndex, 1);
+      lfImages.splice(targetIndex, 0, moved);
+      renderPhotoList();
+    });
+  });
+}
+
+function movePhoto(index, delta) {
+  const target = index + delta;
+  if (target < 0 || target >= lfImages.length) return;
+  [lfImages[index], lfImages[target]] = [lfImages[target], lfImages[index]];
+  renderPhotoList();
+}
+
+function removePhoto(index) {
+  lfImages.splice(index, 1);
+  renderPhotoList();
+}
+
+function handleAddPhotoUrl() {
+  const input = document.getElementById("lf-image-url-input");
+  const url = input.value.trim();
+  if (!url) return;
+  lfImages.push(url);
+  input.value = "";
+  renderPhotoList();
+}
+
+async function handlePhotoFilesSelected(e) {
+  const files = Array.from(e.target.files || []);
+  if (!files.length) return;
+  ensureGithubToken();
+  if (!getGithubToken()) {
+    e.target.value = "";
+    return;
+  }
+  const status = document.getElementById("lf-photos-status");
+  for (let i = 0; i < files.length; i++) {
+    status.textContent = `Envoi de la photo ${i + 1}/${files.length}...`;
+    try {
+      const path = await uploadImageFile(files[i], lfDraftId);
+      lfImages.push(path);
+      renderPhotoList();
+    } catch (err) {
+      status.textContent = "Erreur d'envoi d'une photo : " + err.message;
+      e.target.value = "";
+      return;
+    }
+  }
+  status.textContent = "";
+  e.target.value = "";
 }
 
 function fileToBase64(file) {
@@ -551,16 +657,6 @@ async function uploadImageFile(file, prefix) {
   const path = `images/uploads/${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}.${ext}`;
   await ghPutRawFile(path, base64, `Ajout de la photo ${file.name}`);
   return path;
-}
-
-async function uploadImageFiles(fileInput, prefix, status) {
-  const files = Array.from(fileInput.files || []);
-  const uploaded = [];
-  for (let i = 0; i < files.length; i++) {
-    if (status) status.textContent = `Envoi des photos (${i + 1}/${files.length})...`;
-    uploaded.push(await uploadImageFile(files[i], prefix));
-  }
-  return uploaded;
 }
 
 let listingSubmitInFlight = false;
@@ -583,21 +679,7 @@ async function handleListingSubmit(e) {
     const existingId = document.getElementById("lf-id").value;
     const isNew = !existingId;
     const title = document.getElementById("lf-title").value.trim();
-    const id = existingId || `${slugify(title) || "bien"}-${Date.now().toString(36)}`;
-
-    const urlImages = document
-      .getElementById("lf-images")
-      .value.split("\n")
-      .map((s) => s.trim())
-      .filter(Boolean);
-
-    let uploadedImages = [];
-    try {
-      uploadedImages = await uploadImageFiles(document.getElementById("lf-image-files"), id, status);
-    } catch (err) {
-      status.textContent = "Erreur d'envoi des photos : " + err.message;
-      return;
-    }
+    const id = existingId || lfDraftId;
 
     const transaction = document.getElementById("lf-transaction").value;
     const priceRentVal = document.getElementById("lf-price-rent").value;
@@ -613,7 +695,7 @@ async function handleListingSubmit(e) {
       pieces: document.getElementById("lf-pieces").value.trim(),
       sdb: document.getElementById("lf-sdb").value.trim(),
       desc: document.getElementById("lf-desc").value.trim(),
-      images: [...uploadedImages, ...urlImages],
+      images: [...lfImages],
     };
 
     status.textContent = "Enregistrement en cours...";
