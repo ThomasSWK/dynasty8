@@ -25,21 +25,21 @@
       "id": "apartment-exec-modern-a",
       "category": "Appartement",
       "transaction": "Location",
-      "title": "Apartment Exec Modern A",
+      "title": "MODERN",
       "priceRent": 1000,
       "priceSale": null,
       "pieces": "1",
-      "sdb": "",
-      "desc": "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+      "sdb": "1",
+      "desc": "Des lignes nettes, du bois chaleureux et une décoration contemporaine pensée pour aller à l’essentiel. Un appartement chic, confortable et moderne, sans tomber dans le showroom impersonnel.",
       "images": [
-        "images/uploads/apartment-exec-modern-a-01.jpg",
         "images/uploads/apartment-exec-modern-a-02.jpg",
         "images/uploads/apartment-exec-modern-a-03.jpg",
         "images/uploads/apartment-exec-modern-a-04.jpg",
         "images/uploads/apartment-exec-modern-a-05.jpg",
         "images/uploads/apartment-exec-modern-a-06.jpg",
         "images/uploads/apartment-exec-modern-a-07.jpg",
-        "images/uploads/apartment-exec-modern-a-08.jpg"
+        "images/uploads/apartment-exec-modern-a-08.jpg",
+        "images/uploads/apartment-exec-modern-a-01.jpg"
       ]
     },
     {
