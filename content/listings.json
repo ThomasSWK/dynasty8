@@ -334,15 +334,15 @@
       "id": "warehouse-large",
       "category": "Entrepôt",
       "transaction": "Location",
-      "title": "Warehouse Large",
+      "title": "TITAN",
       "priceRent": 1000,
       "priceSale": null,
       "pieces": "1",
       "sdb": "",
-      "desc": "Un entrepôt fonctionnel, idéal pour le stockage ou une activité commerciale. Description complète à venir.",
+      "desc": "Un vaste entrepôt pensé pour le stockage à grande échelle, avec ses hautes structures métalliques, ses larges allées et son volume impressionnant. La gamme TITAN offre de la place, beaucoup de place — assez pour développer une activité ambitieuse… ou simplement arrêter de prétendre que « ça rentrera quelque part ».",
       "images": [
-        "images/uploads/warehouse-large-01.jpg",
         "images/uploads/warehouse-large-02.jpg",
+        "images/uploads/warehouse-large-01.jpg",
         "images/uploads/warehouse-large-03.jpg"
       ]
     },
