@@ -193,21 +193,21 @@
       "id": "apartment-high-end",
       "category": "Appartement",
       "transaction": "Location",
-      "title": "Apartment High End",
+      "title": "EMBER",
       "priceRent": 1000,
       "priceSale": null,
       "pieces": "1",
-      "sdb": "",
-      "desc": "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+      "sdb": "1",
+      "desc": "Un intérieur chaleureux et sophistiqué, rythmé par le bois sombre, les tons charbon et quelques éclats rouge orangé. Entre œuvres contemporaines, éclairages feutrés et espaces généreux, la gamme EMBER cultive une élégance confortable — comme un feu de cheminée, mais avec beaucoup plus de mètres carrés.",
       "images": [
-        "images/uploads/apartment-high-end-01.jpg",
         "images/uploads/apartment-high-end-02.jpg",
         "images/uploads/apartment-high-end-03.jpg",
         "images/uploads/apartment-high-end-04.jpg",
         "images/uploads/apartment-high-end-05.jpg",
         "images/uploads/apartment-high-end-06.jpg",
         "images/uploads/apartment-high-end-07.jpg",
-        "images/uploads/apartment-high-end-08.jpg"
+        "images/uploads/apartment-high-end-08.jpg",
+        "images/uploads/apartment-high-end-01.jpg"
       ]
     },
     {
