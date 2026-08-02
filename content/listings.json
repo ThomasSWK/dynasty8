@@ -604,20 +604,6 @@
       "images": [
         "images/uploads/garage-parking-4-01.jpg"
       ]
-    },
-    {
-      "id": "hangar-1",
-      "category": "Garage",
-      "transaction": "Location",
-      "title": "Hangar 1",
-      "priceRent": 1000,
-      "priceSale": null,
-      "pieces": "1",
-      "sdb": "",
-      "desc": "Un espace sécurisé pour vos véhicules. Description complète à venir.",
-      "images": [
-        "images/uploads/hangar-1-01.jpg"
-      ]
     }
   ]
 }
