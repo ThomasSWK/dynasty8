@@ -130,21 +130,21 @@
       "id": "apartment-exec-sharp-a",
       "category": "Appartement",
       "transaction": "Location",
-      "title": "Apartment Exec Sharp A",
+      "title": "SHARP",
       "priceRent": 1000,
       "priceSale": null,
       "pieces": "1",
-      "sdb": "",
-      "desc": "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+      "sdb": "1",
+      "desc": "Ici, tout est net, maîtrisé, sans fioritures inutiles. Entre contrastes élégants, lignes franches et finitions impeccables, la gamme SHARP joue la carte d’un luxe discret, précis et terriblement efficace — un intérieur qui a clairement le sens du détail.",
       "images": [
-        "images/uploads/apartment-exec-sharp-a-01.jpg",
         "images/uploads/apartment-exec-sharp-a-02.jpg",
         "images/uploads/apartment-exec-sharp-a-03.jpg",
         "images/uploads/apartment-exec-sharp-a-04.jpg",
         "images/uploads/apartment-exec-sharp-a-05.jpg",
         "images/uploads/apartment-exec-sharp-a-06.jpg",
         "images/uploads/apartment-exec-sharp-a-07.jpg",
-        "images/uploads/apartment-exec-sharp-a-08.jpg"
+        "images/uploads/apartment-exec-sharp-a-08.jpg",
+        "images/uploads/apartment-exec-sharp-a-01.jpg"
       ]
     },
     {
