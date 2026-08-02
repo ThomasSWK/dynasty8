@@ -143,17 +143,19 @@ function renderFounderBlock() {
     el.innerHTML = "";
     return;
   }
-  const showSeparator = founder.title || admin;
   el.innerHTML = `
-    ${
-      founder.photo
-        ? `<img id="founderPhotoEl" src="${escapeHtml(founder.photo)}" alt="${escapeHtml(founder.name || "")}">`
-        : admin
-        ? `<div class="founder-photo-placeholder" id="founderPhotoEl">+ Photo</div>`
-        : ""
-    }
-    <div class="founder-name">
-      <span id="founderNameEl" data-placeholder="Nom">${escapeHtml(founder.name || "")}</span><span>${showSeparator ? ", " : ""}</span><span id="founderTitleEl" data-placeholder="Titre">${escapeHtml(founder.title || "")}</span>
+    <div class="fs-photo">
+      ${
+        founder.photo
+          ? `<img id="founderPhotoEl" src="${escapeHtml(founder.photo)}" alt="${escapeHtml(founder.name || "")}">`
+          : admin
+          ? `<div class="fs-photo-placeholder" id="founderPhotoEl">+ Photo</div>`
+          : ""
+      }
+    </div>
+    <div class="fs-text">
+      <div class="fs-name" id="founderNameEl" data-placeholder="Nom">${escapeHtml(founder.name || "")}</div>
+      <div class="fs-title" id="founderTitleEl" data-placeholder="Titre">${escapeHtml(founder.title || "")}</div>
     </div>
   `;
   if (admin) {
