@@ -23,11 +23,10 @@ Chaque bien dans `content/listings.json` (tableau `items`) a la forme :
 {
   "id": "identifiant-unique",
   "category": "Appartement",
-  "transaction": "Vente",
+  "transaction": "Location et vente",
   "title": "Loft Vercetti",
-  "location": "Vinewood Hills",
-  "price": "2 400 $ / mois",
-  "surface": "95",
+  "priceRent": 2400,
+  "priceSale": 350000,
   "pieces": "2",
   "sdb": "1",
   "desc": "Courte description du bien.",
@@ -35,7 +34,8 @@ Chaque bien dans `content/listings.json` (tableau `items`) a la forme :
 }
 ```
 - `category` : `Appartement`, `Maison`, `Entrepôt` ou `Garage` — sert aux filtres de la page.
-- `price` est du texte libre (vous choisissez le format : "85 000 $", "2 400 $ / mois", "À partir de 120 000 $", etc.).
+- `transaction` : `Location`, `Vente` ou `Location et vente`. Détermine quel(s) champ(s) de prix sont affichés/demandés dans le formulaire admin.
+- `priceRent` (nombre, prix par semaine) et `priceSale` (nombre, prix de vente) — seul le champ pertinent pour la transaction est rempli (l'autre reste `null`). Le site les affiche automatiquement formatés en euros/dollars avec séparateur de milliers, ex. "À partir de 2 400$/semaine" et "À partir de 350 000$".
 - Les photos peuvent être **importées directement depuis votre ordinateur** (le formulaire admin les envoie dans `images/uploads/` du dépôt via l'API GitHub) **ou** être des liens externes (Imgur, Discord CDN, etc.) collés dans le champ "URLs". Les deux méthodes peuvent être combinées sur un même bien.
 
 De la même façon, `content/site.json` a un champ `founder` (photo, nom, titre) affiché dans la section "L'agence" — la photo se met à jour depuis le formulaire "Modifier le contenu" (upload ou chemin manuel).

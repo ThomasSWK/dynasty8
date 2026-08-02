@@ -225,18 +225,13 @@
     font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;
     padding:5px 12px;
   }
-  .price-tag{
-    position:absolute;bottom:14px;right:14px;
-    background:rgba(10,10,10,0.85);
-    color:var(--gold-light);
-    font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;
-    padding:5px 14px;border:1px solid var(--line);
-  }
   .card-body{padding:22px 24px 26px;}
-  .card-body h3{font-size:1.4rem;color:var(--cream);font-weight:600;margin-bottom:4px;}
-  .card-body .loc{font-size:0.78rem;color:var(--gold-dim);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px;}
+  .card-body h3{font-size:1.4rem;color:var(--cream);font-weight:600;margin-bottom:10px;}
   .specs{display:flex;gap:16px;font-size:0.82rem;color:var(--cream-dim);}
   .specs span{display:flex;align-items:center;gap:6px;}
+  .price-lines{margin-top:12px;display:flex;flex-direction:column;gap:3px;}
+  .price-lines .price-line{font-size:0.92rem;color:var(--gold-light);font-family:'Cormorant Garamond',serif;font-weight:600;}
+  .price-lines .price-kind{font-family:'Jost',sans-serif;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold-dim);font-weight:400;margin-right:4px;}
 
   .card-admin-actions{
     position:absolute; top:14px; right:14px; z-index:2;
@@ -297,8 +292,7 @@
   }
   .thumbs img.active, .thumbs img:hover{opacity:1;border-color:var(--gold);}
   .modal-body{padding:30px 34px 40px;}
-  .modal-body .loc{font-size:0.8rem;color:var(--gold-dim);letter-spacing:0.1em;text-transform:uppercase;}
-  .modal-body h2{font-size:2.1rem;color:var(--cream);margin:6px 0 18px;font-weight:600;}
+  .modal-body h2{font-size:2.1rem;color:var(--cream);margin:0 0 18px;font-weight:600;}
   .modal-specs{
     display:flex;gap:28px;flex-wrap:wrap;
     padding:18px 0; margin-bottom:22px;
@@ -308,7 +302,9 @@
   .modal-specs .num{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--gold-light);font-weight:600;}
   .modal-specs .lbl{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cream-dim);}
   .modal-body .desc{color:var(--cream-dim);line-height:1.75;font-size:0.98rem;margin-bottom:26px;}
-  .modal-price{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold-light);font-weight:600;margin-bottom:20px;}
+  .modal-price{margin-bottom:20px;}
+  .modal-price .price-line{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--gold-light);font-weight:600;}
+  .modal-price .price-kind{font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dim);font-weight:400;margin-right:6px;}
   .contact-btn{
     display:inline-flex;align-items:center;gap:10px;
     padding:14px 32px;background:var(--gold);color:var(--black);
@@ -518,7 +514,6 @@
     </div>
     <div class="thumbs" id="thumbsRow"></div>
     <div class="modal-body">
-      <div class="loc" id="modalLoc"></div>
       <h2 id="modalTitle"></h2>
       <div class="modal-specs" id="modalSpecs"></div>
       <div class="modal-price" id="modalPrice"></div>

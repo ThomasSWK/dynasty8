@@ -3,3 +3,7 @@ function escapeHtml(str) {
   div.textContent = str ?? "";
   return div.innerHTML;
 }
+
+function formatMoney(n) {
+  return Number(n).toLocaleString("fr-FR") + "$";
+}

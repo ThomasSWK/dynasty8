@@ -3,7 +3,7 @@
 // les modifications via l'API GitHub (voir github-api.js) une fois un token admin fourni.
 
 const CATEGORIES = ["Appartement", "Maison", "Entrepôt", "Garage"];
-const TRANSACTIONS = ["Vente", "Location"];
+const TRANSACTIONS = ["Location", "Vente", "Location et vente"];
 
 let LISTINGS = [];
 let SITE_CONTENT = {};
@@ -289,6 +289,29 @@ function piecesLabel(category, short) {
   }
 }
 
+function transactionLabel(t) {
+  return t === "Location et vente" ? "Location & Vente" : t;
+}
+
+function buildPriceLines(item) {
+  const lines = [];
+  if (item.transaction !== "Vente" && item.priceRent) {
+    lines.push({ label: "Location", text: `À partir de ${formatMoney(item.priceRent)}/semaine` });
+  }
+  if (item.transaction !== "Location" && item.priceSale) {
+    lines.push({ label: "Vente", text: `À partir de ${formatMoney(item.priceSale)}` });
+  }
+  return lines;
+}
+
+function renderPriceLines(item) {
+  const lines = buildPriceLines(item);
+  const multi = lines.length > 1;
+  return lines
+    .map((l) => `<div class="price-line">${multi ? `<span class="price-kind">${l.label} :</span> ` : ""}${l.text}</div>`)
+    .join("");
+}
+
 const ICON_HOUSE = `<svg class="ph-icon" viewBox="0 0 24 24" fill="#c9a227"><path d="M12 2 2 10h3v10h6v-6h2v6h6V10h3z"/></svg>`;
 
 function renderFilters() {
@@ -325,17 +348,15 @@ function renderGrid(filter = "Tous") {
       }
       <div class="card-img">
         ${l.images && l.images[0] ? `<img src="${escapeHtml(l.images[0])}" alt="${escapeHtml(l.title)}">` : ICON_HOUSE}
-        <div class="badge">${escapeHtml(l.category)} · ${escapeHtml(l.transaction)}</div>
-        <div class="price-tag">${escapeHtml(l.price)}</div>
+        <div class="badge">${escapeHtml(l.category)} · ${escapeHtml(transactionLabel(l.transaction))}</div>
       </div>
       <div class="card-body">
         <h3>${escapeHtml(l.title)}</h3>
-        <div class="loc">${escapeHtml(l.location)}</div>
         <div class="specs">
           <span>🛏 ${escapeHtml(l.pieces)} ${piecesLabel(l.category, true)}</span>
           ${l.sdb ? `<span>🛁 ${escapeHtml(l.sdb)} sdb</span>` : ""}
-          <span>📐 ${escapeHtml(l.surface)} m²</span>
         </div>
+        <div class="price-lines">${renderPriceLines(l)}</div>
       </div>
     </div>`
     )
@@ -347,13 +368,11 @@ function openModal(id) {
   if (!currentListing) return;
   currentImgIdx = 0;
   document.getElementById("modalTitle").textContent = currentListing.title;
-  document.getElementById("modalLoc").textContent = currentListing.location;
-  document.getElementById("modalPrice").textContent = currentListing.price;
   document.getElementById("modalDesc").textContent = currentListing.desc;
+  document.getElementById("modalPrice").innerHTML = renderPriceLines(currentListing);
   document.getElementById("modalSpecs").innerHTML = `
     <div><div class="num">${escapeHtml(currentListing.pieces)}</div><div class="lbl">${piecesLabel(currentListing.category)}</div></div>
     ${currentListing.sdb ? `<div><div class="num">${escapeHtml(currentListing.sdb)}</div><div class="lbl">Salles de bain</div></div>` : ""}
-    <div><div class="num">${escapeHtml(currentListing.surface)}</div><div class="lbl">m²</div></div>
   `;
   updateGallery();
   renderThumbs();
@@ -414,17 +433,14 @@ function injectListingFormModal() {
           <label>Titre du bien</label>
           <input type="text" id="lf-title" required>
 
-          <label>Quartier / emplacement</label>
-          <input type="text" id="lf-location" required>
-
           <div class="field-row">
-            <div>
-              <label>Prix (texte libre)</label>
-              <input type="text" id="lf-price" placeholder="ex: 85 000 $ ou 2 400 $ / mois" required>
+            <div id="lf-price-rent-wrap">
+              <label>Prix à la semaine ($)</label>
+              <input type="number" id="lf-price-rent" min="0" placeholder="ex: 2000">
             </div>
-            <div>
-              <label>Superficie (m²)</label>
-              <input type="text" id="lf-surface" required>
+            <div id="lf-price-sale-wrap">
+              <label>Prix de vente ($)</label>
+              <input type="number" id="lf-price-sale" min="0" placeholder="ex: 400000">
             </div>
           </div>
 
@@ -467,7 +483,18 @@ function injectListingFormModal() {
     document.getElementById("lf-pieces-label").textContent =
       piecesLabel(e.target.value, false) === "Places" ? "Places" : piecesLabel(e.target.value, false);
   });
+  document.getElementById("lf-transaction").addEventListener("change", updatePriceFieldsVisibility);
   document.getElementById("listingForm").addEventListener("submit", handleListingSubmit);
+}
+
+function updatePriceFieldsVisibility() {
+  const t = document.getElementById("lf-transaction").value;
+  const showRent = t !== "Vente";
+  const showSale = t !== "Location";
+  document.getElementById("lf-price-rent-wrap").style.display = showRent ? "" : "none";
+  document.getElementById("lf-price-sale-wrap").style.display = showSale ? "" : "none";
+  document.getElementById("lf-price-rent").required = showRent;
+  document.getElementById("lf-price-sale").required = showSale;
 }
 
 function openListingForm(id) {
@@ -479,15 +506,15 @@ function openListingForm(id) {
   document.getElementById("lf-transaction").value = item ? item.transaction : TRANSACTIONS[0];
   document.getElementById("lf-pieces-label").textContent = piecesLabel(document.getElementById("lf-category").value, false);
   document.getElementById("lf-title").value = item ? item.title : "";
-  document.getElementById("lf-location").value = item ? item.location : "";
-  document.getElementById("lf-price").value = item ? item.price : "";
-  document.getElementById("lf-surface").value = item ? item.surface : "";
+  document.getElementById("lf-price-rent").value = item && item.priceRent ? item.priceRent : "";
+  document.getElementById("lf-price-sale").value = item && item.priceSale ? item.priceSale : "";
   document.getElementById("lf-pieces").value = item ? item.pieces : "";
   document.getElementById("lf-sdb").value = item ? item.sdb : "";
   document.getElementById("lf-desc").value = item ? item.desc : "";
   document.getElementById("lf-images").value = item && item.images ? item.images.join("\n") : "";
   document.getElementById("lf-image-files").value = "";
   document.getElementById("listingFormStatus").textContent = "";
+  updatePriceFieldsVisibility();
   document.getElementById("listingFormModal").classList.add("open");
 }
 
@@ -554,14 +581,17 @@ async function handleListingSubmit(e) {
     return;
   }
 
+  const transaction = document.getElementById("lf-transaction").value;
+  const priceRentVal = document.getElementById("lf-price-rent").value;
+  const priceSaleVal = document.getElementById("lf-price-sale").value;
+
   const newItem = {
     id,
     category: document.getElementById("lf-category").value,
-    transaction: document.getElementById("lf-transaction").value,
+    transaction,
     title,
-    location: document.getElementById("lf-location").value.trim(),
-    price: document.getElementById("lf-price").value.trim(),
-    surface: document.getElementById("lf-surface").value.trim(),
+    priceRent: transaction !== "Vente" && priceRentVal ? Number(priceRentVal) : null,
+    priceSale: transaction !== "Location" && priceSaleVal ? Number(priceSaleVal) : null,
     pieces: document.getElementById("lf-pieces").value.trim(),
     sdb: document.getElementById("lf-sdb").value.trim(),
     desc: document.getElementById("lf-desc").value.trim(),
