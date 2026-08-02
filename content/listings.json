@@ -4,21 +4,21 @@
       "id": "apartment-exec-aqua-a",
       "category": "Appartement",
       "transaction": "Location",
-      "title": "Apartment Exec Aqua A",
+      "title": "AQUA",
       "priceRent": 1000,
       "priceSale": null,
       "pieces": "1",
-      "sdb": "",
-      "desc": "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+      "sdb": "1",
+      "desc": "Un intérieur frais et apaisant, où le turquoise rencontre le gris et le bois clair. Lumineux, élégant et parfaitement équilibré — presque aussi relaxant qu’une journée au bord de l’eau.",
       "images": [
-        "images/uploads/apartment-exec-aqua-a-01.jpg",
         "images/uploads/apartment-exec-aqua-a-02.jpg",
         "images/uploads/apartment-exec-aqua-a-03.jpg",
         "images/uploads/apartment-exec-aqua-a-04.jpg",
         "images/uploads/apartment-exec-aqua-a-05.jpg",
         "images/uploads/apartment-exec-aqua-a-06.jpg",
         "images/uploads/apartment-exec-aqua-a-07.jpg",
-        "images/uploads/apartment-exec-aqua-a-08.jpg"
+        "images/uploads/apartment-exec-aqua-a-08.jpg",
+        "images/uploads/apartment-exec-aqua-a-01.jpg"
       ]
     },
     {
