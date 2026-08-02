@@ -365,15 +365,15 @@
       "id": "warehouse-small",
       "category": "Entrepôt",
       "transaction": "Location",
-      "title": "Warehouse Small",
+      "title": "nest",
       "priceRent": 1000,
       "priceSale": null,
       "pieces": "1",
       "sdb": "",
-      "desc": "Un entrepôt fonctionnel, idéal pour le stockage ou une activité commerciale. Description complète à venir.",
+      "desc": "Un petit entrepôt compact et bien organisé, idéal pour démarrer une activité ou gérer un stock limité sans perdre d’espace. La gamme NEST va droit à l’essentiel : des rayonnages, une zone de travail et juste assez de place pour grandir sans déjà payer pour du vide.",
       "images": [
-        "images/uploads/warehouse-small-01.jpg",
-        "images/uploads/warehouse-small-02.jpg"
+        "images/uploads/warehouse-small-02.jpg",
+        "images/uploads/warehouse-small-01.jpg"
       ]
     },
     {
