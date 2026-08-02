@@ -1,46 +1,679 @@
-{
-  "items": [
-    {
-      "id": "aqua-msc785sr",
-      "category": "Appartement",
-      "transaction": "Location",
-      "title": "AQUA",
-      "priceRent": 2000,
-      "priceSale": null,
-      "pieces": "1",
-      "sdb": "1",
-      "desc": "Un intérieur frais et apaisant, où le turquoise rencontre le gris et le bois clair. Lumineux, élégant et parfaitement équilibré — presque aussi relaxant qu’une journée au bord de l’eau.",
-      "images": [
-        "images/uploads/aqua-msc785sr-msc785td-rksre.png",
-        "images/uploads/aqua-msc785sr-msc787yd-kkx8s.png",
-        "images/uploads/aqua-msc785sr-msc789q3-tbhzx.png",
-        "images/uploads/aqua-msc785sr-msc78c1h-1g0p4.png",
-        "images/uploads/aqua-msc785sr-msc78dym-v27lf.png",
-        "images/uploads/aqua-msc785sr-msc78g0w-ohzc3.png",
-        "images/uploads/aqua-msc785sr-msc78i5f-blyew.png",
-        "images/uploads/aqua-msc785sr-msc78ka7-06o6t.png"
-      ]
-    },
-    {
-      "id": "modern-msc8r7rf",
-      "category": "Appartement",
-      "transaction": "Location et vente",
-      "title": "MODERN",
-      "priceRent": 2200,
-      "priceSale": 350000,
-      "pieces": "2",
-      "sdb": "1",
-      "desc": "Test appartement",
-      "images": [
-        "images/uploads/modern-msc8r7rf-msc8ra3r-hepgp.png",
-        "images/uploads/modern-msc8r7rf-msc8r7s0-hbwp0.png",
-        "images/uploads/modern-msc8r7rf-msc8rby9-4tffj.png",
-        "images/uploads/modern-msc8r7rf-msc8remh-hchoh.png",
-        "images/uploads/modern-msc8r7rf-msc8rgfa-6i4j3.png",
-        "images/uploads/modern-msc8r7rf-msc8riby-x6yxh.png",
-        "images/uploads/modern-msc8r7rf-msc8rk9j-juwhk.png",
-        "images/uploads/modern-msc8r7rf-msc8rm8v-re0hv.png"
-      ]
-    }
-  ]
+﻿{
+    "items":  [
+                  {
+                      "id":  "aqua-msc785sr",
+                      "category":  "Appartement",
+                      "transaction":  "Location",
+                      "title":  "AQUA",
+                      "priceRent":  2000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "1",
+                      "desc":  "Un intérieur frais et apaisant, où le turquoise rencontre le gris et le bois clair. Lumineux, élégant et parfaitement équilibré — presque aussi relaxant qu’une journée au bord de l’eau.",
+                      "images":  [
+                                     "images/uploads/aqua-msc785sr-msc785td-rksre.png",
+                                     "images/uploads/aqua-msc785sr-msc787yd-kkx8s.png",
+                                     "images/uploads/aqua-msc785sr-msc789q3-tbhzx.png",
+                                     "images/uploads/aqua-msc785sr-msc78c1h-1g0p4.png",
+                                     "images/uploads/aqua-msc785sr-msc78dym-v27lf.png",
+                                     "images/uploads/aqua-msc785sr-msc78g0w-ohzc3.png",
+                                     "images/uploads/aqua-msc785sr-msc78i5f-blyew.png",
+                                     "images/uploads/aqua-msc785sr-msc78ka7-06o6t.png"
+                                 ]
+                  },
+                  {
+                      "id":  "modern-msc8r7rf",
+                      "category":  "Appartement",
+                      "transaction":  "Location et vente",
+                      "title":  "MODERN",
+                      "priceRent":  2200,
+                      "priceSale":  350000,
+                      "pieces":  "2",
+                      "sdb":  "1",
+                      "desc":  "Test appartement",
+                      "images":  [
+                                     "images/uploads/modern-msc8r7rf-msc8ra3r-hepgp.png",
+                                     "images/uploads/modern-msc8r7rf-msc8r7s0-hbwp0.png",
+                                     "images/uploads/modern-msc8r7rf-msc8rby9-4tffj.png",
+                                     "images/uploads/modern-msc8r7rf-msc8remh-hchoh.png",
+                                     "images/uploads/modern-msc8r7rf-msc8rgfa-6i4j3.png",
+                                     "images/uploads/modern-msc8r7rf-msc8riby-x6yxh.png",
+                                     "images/uploads/modern-msc8r7rf-msc8rk9j-juwhk.png",
+                                     "images/uploads/modern-msc8r7rf-msc8rm8v-re0hv.png"
+                                 ]
+                  },
+                  {
+                      "id":  "apartment-exec-aqua-a",
+                      "category":  "Appartement",
+                      "transaction":  "Location",
+                      "title":  "Apartment Exec Aqua A",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/apartment-exec-aqua-a-01.jpg",
+                                     "images/uploads/apartment-exec-aqua-a-02.jpg",
+                                     "images/uploads/apartment-exec-aqua-a-03.jpg",
+                                     "images/uploads/apartment-exec-aqua-a-04.jpg",
+                                     "images/uploads/apartment-exec-aqua-a-05.jpg",
+                                     "images/uploads/apartment-exec-aqua-a-06.jpg",
+                                     "images/uploads/apartment-exec-aqua-a-07.jpg",
+                                     "images/uploads/apartment-exec-aqua-a-08.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "apartment-exec-modern-a",
+                      "category":  "Appartement",
+                      "transaction":  "Location",
+                      "title":  "Apartment Exec Modern A",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/apartment-exec-modern-a-01.jpg",
+                                     "images/uploads/apartment-exec-modern-a-02.jpg",
+                                     "images/uploads/apartment-exec-modern-a-03.jpg",
+                                     "images/uploads/apartment-exec-modern-a-04.jpg",
+                                     "images/uploads/apartment-exec-modern-a-05.jpg",
+                                     "images/uploads/apartment-exec-modern-a-06.jpg",
+                                     "images/uploads/apartment-exec-modern-a-07.jpg",
+                                     "images/uploads/apartment-exec-modern-a-08.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "apartment-exec-monochrome-a",
+                      "category":  "Appartement",
+                      "transaction":  "Location",
+                      "title":  "Apartment Exec Monochrome A",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/apartment-exec-monochrome-a-01.jpg",
+                                     "images/uploads/apartment-exec-monochrome-a-02.jpg",
+                                     "images/uploads/apartment-exec-monochrome-a-03.jpg",
+                                     "images/uploads/apartment-exec-monochrome-a-04.jpg",
+                                     "images/uploads/apartment-exec-monochrome-a-05.jpg",
+                                     "images/uploads/apartment-exec-monochrome-a-06.jpg",
+                                     "images/uploads/apartment-exec-monochrome-a-07.jpg",
+                                     "images/uploads/apartment-exec-monochrome-a-08.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "apartment-exec-moody-a",
+                      "category":  "Appartement",
+                      "transaction":  "Location",
+                      "title":  "Apartment Exec Moody A",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/apartment-exec-moody-a-01.jpg",
+                                     "images/uploads/apartment-exec-moody-a-02.jpg",
+                                     "images/uploads/apartment-exec-moody-a-03.jpg",
+                                     "images/uploads/apartment-exec-moody-a-04.jpg",
+                                     "images/uploads/apartment-exec-moody-a-05.jpg",
+                                     "images/uploads/apartment-exec-moody-a-06.jpg",
+                                     "images/uploads/apartment-exec-moody-a-07.jpg",
+                                     "images/uploads/apartment-exec-moody-a-08.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "apartment-exec-regal-a",
+                      "category":  "Appartement",
+                      "transaction":  "Location",
+                      "title":  "Apartment Exec Regal A",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/apartment-exec-regal-a-01.jpg",
+                                     "images/uploads/apartment-exec-regal-a-02.jpg",
+                                     "images/uploads/apartment-exec-regal-a-03.jpg",
+                                     "images/uploads/apartment-exec-regal-a-04.jpg",
+                                     "images/uploads/apartment-exec-regal-a-05.jpg",
+                                     "images/uploads/apartment-exec-regal-a-06.jpg",
+                                     "images/uploads/apartment-exec-regal-a-07.jpg",
+                                     "images/uploads/apartment-exec-regal-a-08.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "apartment-exec-seductive-a",
+                      "category":  "Appartement",
+                      "transaction":  "Location",
+                      "title":  "Apartment Exec Seductive A",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/apartment-exec-seductive-a-01.jpg",
+                                     "images/uploads/apartment-exec-seductive-a-02.jpg",
+                                     "images/uploads/apartment-exec-seductive-a-03.jpg",
+                                     "images/uploads/apartment-exec-seductive-a-04.jpg",
+                                     "images/uploads/apartment-exec-seductive-a-05.jpg",
+                                     "images/uploads/apartment-exec-seductive-a-06.jpg",
+                                     "images/uploads/apartment-exec-seductive-a-07.jpg",
+                                     "images/uploads/apartment-exec-seductive-a-08.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "apartment-exec-sharp-a",
+                      "category":  "Appartement",
+                      "transaction":  "Location",
+                      "title":  "Apartment Exec Sharp A",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/apartment-exec-sharp-a-01.jpg",
+                                     "images/uploads/apartment-exec-sharp-a-02.jpg",
+                                     "images/uploads/apartment-exec-sharp-a-03.jpg",
+                                     "images/uploads/apartment-exec-sharp-a-04.jpg",
+                                     "images/uploads/apartment-exec-sharp-a-05.jpg",
+                                     "images/uploads/apartment-exec-sharp-a-06.jpg",
+                                     "images/uploads/apartment-exec-sharp-a-07.jpg",
+                                     "images/uploads/apartment-exec-sharp-a-08.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "apartment-exec-vibrant-a",
+                      "category":  "Appartement",
+                      "transaction":  "Location",
+                      "title":  "Apartment Exec Vibrant A",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/apartment-exec-vibrant-a-01.jpg",
+                                     "images/uploads/apartment-exec-vibrant-a-02.jpg",
+                                     "images/uploads/apartment-exec-vibrant-a-03.jpg",
+                                     "images/uploads/apartment-exec-vibrant-a-04.jpg",
+                                     "images/uploads/apartment-exec-vibrant-a-05.jpg",
+                                     "images/uploads/apartment-exec-vibrant-a-06.jpg",
+                                     "images/uploads/apartment-exec-vibrant-a-07.jpg",
+                                     "images/uploads/apartment-exec-vibrant-a-08.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "apartment-gtao-hi-1",
+                      "category":  "Appartement",
+                      "transaction":  "Location",
+                      "title":  "Apartment Gtao Hi 1",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/apartment-gtao-hi-1-01.jpg",
+                                     "images/uploads/apartment-gtao-hi-1-02.jpg",
+                                     "images/uploads/apartment-gtao-hi-1-03.jpg",
+                                     "images/uploads/apartment-gtao-hi-1-04.jpg",
+                                     "images/uploads/apartment-gtao-hi-1-05.jpg",
+                                     "images/uploads/apartment-gtao-hi-1-06.jpg",
+                                     "images/uploads/apartment-gtao-hi-1-07.jpg",
+                                     "images/uploads/apartment-gtao-hi-1-08.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "apartment-high-end",
+                      "category":  "Appartement",
+                      "transaction":  "Location",
+                      "title":  "Apartment High End",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/apartment-high-end-01.jpg",
+                                     "images/uploads/apartment-high-end-02.jpg",
+                                     "images/uploads/apartment-high-end-03.jpg",
+                                     "images/uploads/apartment-high-end-04.jpg",
+                                     "images/uploads/apartment-high-end-05.jpg",
+                                     "images/uploads/apartment-high-end-06.jpg",
+                                     "images/uploads/apartment-high-end-07.jpg",
+                                     "images/uploads/apartment-high-end-08.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "apartment-penthouse",
+                      "category":  "Appartement",
+                      "transaction":  "Location",
+                      "title":  "Apartment Penthouse",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/apartment-penthouse-01.jpg",
+                                     "images/uploads/apartment-penthouse-02.jpg",
+                                     "images/uploads/apartment-penthouse-03.jpg",
+                                     "images/uploads/apartment-penthouse-04.jpg",
+                                     "images/uploads/apartment-penthouse-05.jpg",
+                                     "images/uploads/apartment-penthouse-06.jpg",
+                                     "images/uploads/apartment-penthouse-07.jpg",
+                                     "images/uploads/apartment-penthouse-08.jpg",
+                                     "images/uploads/apartment-penthouse-09.jpg",
+                                     "images/uploads/apartment-penthouse-10.jpg",
+                                     "images/uploads/apartment-penthouse-11.jpg",
+                                     "images/uploads/apartment-penthouse-12.jpg",
+                                     "images/uploads/apartment-penthouse-13.jpg",
+                                     "images/uploads/apartment-penthouse-14.jpg",
+                                     "images/uploads/apartment-penthouse-15.jpg",
+                                     "images/uploads/apartment-penthouse-16.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "apartment-single-bedroom",
+                      "category":  "Appartement",
+                      "transaction":  "Location",
+                      "title":  "Apartment Single Bedroom",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/apartment-single-bedroom-01.jpg",
+                                     "images/uploads/apartment-single-bedroom-02.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "house-gtao-hi-1",
+                      "category":  "Maison",
+                      "transaction":  "Location",
+                      "title":  "House Gtao Hi 1",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Une maison spacieuse et bien située. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/house-gtao-hi-1-01.jpg",
+                                     "images/uploads/house-gtao-hi-1-02.jpg",
+                                     "images/uploads/house-gtao-hi-1-03.jpg",
+                                     "images/uploads/house-gtao-hi-1-04.jpg",
+                                     "images/uploads/house-gtao-hi-1-05.jpg",
+                                     "images/uploads/house-gtao-hi-1-06.jpg",
+                                     "images/uploads/house-gtao-hi-1-07.jpg",
+                                     "images/uploads/house-gtao-hi-1-08.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "house-gtao-hi-7",
+                      "category":  "Maison",
+                      "transaction":  "Location",
+                      "title":  "House Gtao Hi 7",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Une maison spacieuse et bien située. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/house-gtao-hi-7-01.jpg",
+                                     "images/uploads/house-gtao-hi-7-02.jpg",
+                                     "images/uploads/house-gtao-hi-7-03.jpg",
+                                     "images/uploads/house-gtao-hi-7-04.jpg",
+                                     "images/uploads/house-gtao-hi-7-05.jpg",
+                                     "images/uploads/house-gtao-hi-7-06.jpg",
+                                     "images/uploads/house-gtao-hi-7-07.jpg",
+                                     "images/uploads/house-gtao-hi-7-08.jpg",
+                                     "images/uploads/house-gtao-hi-7-09.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "house-gtao-low-1",
+                      "category":  "Maison",
+                      "transaction":  "Location",
+                      "title":  "House Gtao Low 1",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Une maison spacieuse et bien située. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/house-gtao-low-1-01.jpg",
+                                     "images/uploads/house-gtao-low-1-02.jpg",
+                                     "images/uploads/house-gtao-low-1-03.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "house-gtao-mid-1",
+                      "category":  "Maison",
+                      "transaction":  "Location",
+                      "title":  "House Gtao Mid 1",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Une maison spacieuse et bien située. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/house-gtao-mid-1-01.jpg",
+                                     "images/uploads/house-gtao-mid-1-02.jpg",
+                                     "images/uploads/house-gtao-mid-1-03.jpg",
+                                     "images/uploads/house-gtao-mid-1-04.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "warehouse-large",
+                      "category":  "Entrepôt",
+                      "transaction":  "Location",
+                      "title":  "Warehouse Large",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un entrepôt fonctionnel, idéal pour le stockage ou une activité commerciale. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/warehouse-large-01.jpg",
+                                     "images/uploads/warehouse-large-02.jpg",
+                                     "images/uploads/warehouse-large-03.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "warehouse-medium",
+                      "category":  "Entrepôt",
+                      "transaction":  "Location",
+                      "title":  "Warehouse Medium",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un entrepôt fonctionnel, idéal pour le stockage ou une activité commerciale. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/warehouse-medium-01.jpg",
+                                     "images/uploads/warehouse-medium-02.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "warehouse-small",
+                      "category":  "Entrepôt",
+                      "transaction":  "Location",
+                      "title":  "Warehouse Small",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un entrepôt fonctionnel, idéal pour le stockage ou une activité commerciale. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/warehouse-small-01.jpg",
+                                     "images/uploads/warehouse-small-02.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-1",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage 1",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-1-01.jpg",
+                                     "images/uploads/garage-1-02.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-2",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage 2",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-2-01.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-3",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage 3",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-3-01.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-4",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage 4",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images": []
+                  },
+                  {
+                      "id":  "garage-5",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage 5",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-5-01.jpg",
+                                     "images/uploads/garage-5-02.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-deluxe",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage Deluxe",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-deluxe-01.jpg",
+                                     "images/uploads/garage-deluxe-02.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-deluxe-2",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage Deluxe 2",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-deluxe-2-01.jpg",
+                                     "images/uploads/garage-deluxe-2-02.jpg",
+                                     "images/uploads/garage-deluxe-2-03.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-deluxe-3",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage Deluxe 3",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-deluxe-3-01.jpg",
+                                     "images/uploads/garage-deluxe-3-02.jpg",
+                                     "images/uploads/garage-deluxe-3-03.jpg",
+                                     "images/uploads/garage-deluxe-3-04.jpg",
+                                     "images/uploads/garage-deluxe-3-05.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-large",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage Large",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-large-01.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-large-2",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage Large 2",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-large-2-01.jpg",
+                                     "images/uploads/garage-large-2-02.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-large-3",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage Large 3",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-large-3-01.jpg",
+                                     "images/uploads/garage-large-3-02.jpg",
+                                     "images/uploads/garage-large-3-03.jpg",
+                                     "images/uploads/garage-large-3-04.jpg",
+                                     "images/uploads/garage-large-3-05.jpg",
+                                     "images/uploads/garage-large-3-06.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-large-4",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage Large 4",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-large-4-01.jpg",
+                                     "images/uploads/garage-large-4-02.jpg",
+                                     "images/uploads/garage-large-4-03.jpg",
+                                     "images/uploads/garage-large-4-04.jpg",
+                                     "images/uploads/garage-large-4-05.jpg",
+                                     "images/uploads/garage-large-4-06.jpg",
+                                     "images/uploads/garage-large-4-07.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-parking-1",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage Parking 1",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-parking-1-01.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-parking-3",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage Parking 3",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-parking-3-01.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-parking-4",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage Parking 4",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-parking-4-01.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "garage-parking-6",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Garage Parking 6",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/garage-parking-6-01.jpg"
+                                 ]
+                  },
+                  {
+                      "id":  "hangar-1",
+                      "category":  "Garage",
+                      "transaction":  "Location",
+                      "title":  "Hangar 1",
+                      "priceRent":  1000,
+                      "priceSale":  null,
+                      "pieces":  "1",
+                      "sdb":  "",
+                      "desc":  "Un espace sécurisé pour vos véhicules. Description complète à venir.",
+                      "images":  [
+                                     "images/uploads/hangar-1-01.jpg"
+                                 ]
+                  }
+              ]
 }
