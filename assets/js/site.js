@@ -641,19 +641,51 @@ async function handlePhotoFilesSelected(e) {
   e.target.value = "";
 }
 
-function fileToBase64(file) {
+const IMAGE_MAX_DIMENSION = 1600;
+const IMAGE_JPEG_QUALITY = 0.82;
+
+// Redimensionne et recompresse une image côté navigateur (canvas) avant envoi, pour
+// éviter d'alourdir le dépôt et de ralentir le site avec des photos en pleine résolution.
+function compressImageFile(file, maxDim = IMAGE_MAX_DIMENSION, quality = IMAGE_JPEG_QUALITY) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const ratio = Math.min(1, maxDim / Math.max(img.width, img.height));
+      const w = Math.max(1, Math.round(img.width * ratio));
+      const h = Math.max(1, Math.round(img.height * ratio));
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+      canvas.toBlob(
+        (blob) => (blob ? resolve(blob) : reject(new Error("Échec de la compression de l'image"))),
+        "image/jpeg",
+        quality
+      );
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("Impossible de charger l'image " + file.name));
+    };
+    img.src = url;
+  });
+}
+
+function blobToBase64(blob) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result.split(",")[1]);
-    reader.onerror = () => reject(new Error("Impossible de lire le fichier " + file.name));
-    reader.readAsDataURL(file);
+    reader.onerror = () => reject(new Error("Impossible de lire l'image compressée"));
+    reader.readAsDataURL(blob);
   });
 }
 
 async function uploadImageFile(file, prefix) {
-  const base64 = await fileToBase64(file);
-  const ext = (file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
-  const path = `images/uploads/${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}.${ext}`;
+  const compressed = await compressImageFile(file);
+  const base64 = await blobToBase64(compressed);
+  const path = `images/uploads/${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}.jpg`;
   await ghPutRawFile(path, base64, `Ajout de la photo ${file.name}`);
   return path;
 }
