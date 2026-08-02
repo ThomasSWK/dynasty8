@@ -67,21 +67,21 @@
       "id": "apartment-exec-moody-a",
       "category": "Appartement",
       "transaction": "Location",
-      "title": "Apartment Exec Moody A",
+      "title": "MOODY",
       "priceRent": 1000,
       "priceSale": null,
       "pieces": "1",
-      "sdb": "",
-      "desc": "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+      "sdb": "1",
+      "desc": "Ambiance feutrée, teintes profondes et contrastes chaleureux composent un intérieur intime au caractère bien affirmé. Parfait pour recevoir, travailler… ou simplement disparaître élégamment du monde extérieur.",
       "images": [
-        "images/uploads/apartment-exec-moody-a-01.jpg",
         "images/uploads/apartment-exec-moody-a-02.jpg",
         "images/uploads/apartment-exec-moody-a-03.jpg",
         "images/uploads/apartment-exec-moody-a-04.jpg",
         "images/uploads/apartment-exec-moody-a-05.jpg",
         "images/uploads/apartment-exec-moody-a-06.jpg",
         "images/uploads/apartment-exec-moody-a-07.jpg",
-        "images/uploads/apartment-exec-moody-a-08.jpg"
+        "images/uploads/apartment-exec-moody-a-08.jpg",
+        "images/uploads/apartment-exec-moody-a-01.jpg"
       ]
     },
     {
