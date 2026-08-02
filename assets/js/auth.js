@@ -3,7 +3,7 @@
 //   await sha256Hex("votre-nouveau-mot-de-passe")
 // puis collez le résultat ci-dessous dans D8_PASSWORD_HASH.
 const D8_PASSWORD_HASH =
-  "bae8ae4f388518c3746f6e018777bc5eb808800ee0ae2fbe175eef64c77b6fa9"; // mot de passe par défaut : "dynasty8"
+  "d66098666a711b907f9300ce46f13df363f24dd80345f90c57ae346293e03649";
 
 const SESSION_KEY = "d8_admin_unlocked";
 const TOKEN_KEY = "d8_gh_token";
