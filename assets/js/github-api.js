@@ -22,8 +22,8 @@ function utf8ToB64(str) {
 
 async function ghGetFile(path) {
   const token = getGithubToken();
-  const url = `${GH_API}/repos/${DYNASTY8_CONFIG.owner}/${DYNASTY8_CONFIG.repo}/contents/${path}?ref=${DYNASTY8_CONFIG.branch}`;
-  const res = await fetch(url, { headers: ghHeaders(token) });
+  const url = `${GH_API}/repos/${DYNASTY8_CONFIG.owner}/${DYNASTY8_CONFIG.repo}/contents/${path}?ref=${DYNASTY8_CONFIG.branch}&_=${Date.now()}`;
+  const res = await fetch(url, { headers: ghHeaders(token), cache: "no-store" });
   if (!res.ok) {
     throw new Error(`Impossible de lire ${path} (${res.status})`);
   }
@@ -71,4 +71,21 @@ async function ghPutRawFile(path, base64Content, message) {
     throw new Error(err.message || `Échec de l'envoi de l'image (${res.status})`);
   }
   return res.json();
+}
+
+// Lit un fichier JSON, applique une transformation, puis l'enregistre. Si le sha
+// est périmé (conflit d'écriture), retente une fois avec une lecture fraîche.
+async function ghUpdateFile(path, message, updateFn) {
+  const first = await ghGetFile(path);
+  const updated = updateFn(first.json);
+  try {
+    await ghPutFile(path, updated, message, first.sha);
+    return updated;
+  } catch (err) {
+    if (!/does not match|sha/i.test(err.message || "")) throw err;
+    const retry = await ghGetFile(path);
+    const updatedRetry = updateFn(retry.json);
+    await ghPutFile(path, updatedRetry, message, retry.sha);
+    return updatedRetry;
+  }
 }

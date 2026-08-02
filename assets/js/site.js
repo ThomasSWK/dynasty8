@@ -196,8 +196,7 @@ async function saveSiteContent() {
   saveBtn.disabled = true;
   status.textContent = "Enregistrement...";
   try {
-    const { sha } = await ghGetFile("content/site.json");
-    await ghPutFile("content/site.json", SITE_CONTENT, "Mise à jour du contenu de la page (édition en direct)", sha);
+    await ghUpdateFile("content/site.json", "Mise à jour du contenu de la page (édition en direct)", () => SITE_CONTENT);
     status.textContent = "Enregistré ✓";
     setTimeout(() => {
       if (status.textContent === "Enregistré ✓") status.textContent = "";
@@ -701,12 +700,12 @@ async function handleListingSubmit(e) {
     status.textContent = "Enregistrement en cours...";
 
     try {
-      const { sha, json } = await ghGetFile("content/listings.json");
-      const items = json.items || [];
-      const updatedItems = isNew ? [...items, newItem] : items.map((it) => (it.id === id ? newItem : it));
       const message = isNew ? `Ajout du bien "${newItem.title}"` : `Modification du bien "${newItem.title}"`;
-      await ghPutFile("content/listings.json", { items: updatedItems }, message, sha);
-      LISTINGS = updatedItems;
+      const updated = await ghUpdateFile("content/listings.json", message, (json) => {
+        const items = json.items || [];
+        return { items: isNew ? [...items, newItem] : items.map((it) => (it.id === id ? newItem : it)) };
+      });
+      LISTINGS = updated.items;
       renderFilters();
       renderGrid();
       document.getElementById("listingFormModal").classList.remove("open");
@@ -728,10 +727,10 @@ async function deleteListing(id) {
   ensureGithubToken();
   if (!getGithubToken()) return;
   try {
-    const { sha, json } = await ghGetFile("content/listings.json");
-    const updatedItems = (json.items || []).filter((it) => it.id !== id);
-    await ghPutFile("content/listings.json", { items: updatedItems }, `Suppression du bien "${item.title}"`, sha);
-    LISTINGS = updatedItems;
+    const updated = await ghUpdateFile("content/listings.json", `Suppression du bien "${item.title}"`, (json) => ({
+      items: (json.items || []).filter((it) => it.id !== id),
+    }));
+    LISTINGS = updated.items;
     renderFilters();
     renderGrid();
   } catch (err) {
