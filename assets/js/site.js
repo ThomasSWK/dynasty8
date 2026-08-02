@@ -137,34 +137,38 @@ function triggerImageUpload(kind) {
 
 function renderFounderBlock() {
   const founder = SITE_CONTENT.founder || (SITE_CONTENT.founder = {});
-  const el = document.getElementById("founderBlock");
+  const photoWrap = document.getElementById("founderPhotoWrap");
+  const caption = document.getElementById("founderCaption");
   const admin = isAdmin();
-  if (!admin && !founder.name && !founder.photo) {
-    el.innerHTML = "";
-    return;
+
+  if (founder.photo) {
+    photoWrap.innerHTML = `<img id="founderPhotoEl" src="${escapeHtml(founder.photo)}" alt="${escapeHtml(founder.name || "")}">`;
+  } else if (admin) {
+    photoWrap.innerHTML = `<div class="fs-photo-placeholder" id="founderPhotoEl">+ Photo</div>`;
+  } else {
+    photoWrap.innerHTML = "";
   }
-  el.innerHTML = `
-    <div class="fs-photo">
-      ${
-        founder.photo
-          ? `<img id="founderPhotoEl" src="${escapeHtml(founder.photo)}" alt="${escapeHtml(founder.name || "")}">`
-          : admin
-          ? `<div class="fs-photo-placeholder" id="founderPhotoEl">+ Photo</div>`
-          : ""
-      }
-    </div>
-    <div class="fs-text">
+
+  if (!admin && !founder.name && !founder.title) {
+    caption.innerHTML = "";
+  } else {
+    caption.innerHTML = `
       <div class="fs-name" id="founderNameEl" data-placeholder="Nom">${escapeHtml(founder.name || "")}</div>
       <div class="fs-title" id="founderTitleEl" data-placeholder="Titre">${escapeHtml(founder.title || "")}</div>
-    </div>
-  `;
+    `;
+  }
+
   if (admin) {
     const nameEl = document.getElementById("founderNameEl");
-    nameEl.contentEditable = "true";
-    nameEl.oninput = () => (founder.name = nameEl.textContent);
+    if (nameEl) {
+      nameEl.contentEditable = "true";
+      nameEl.oninput = () => (founder.name = nameEl.textContent);
+    }
     const titleEl = document.getElementById("founderTitleEl");
-    titleEl.contentEditable = "true";
-    titleEl.oninput = () => (founder.title = titleEl.textContent);
+    if (titleEl) {
+      titleEl.contentEditable = "true";
+      titleEl.oninput = () => (founder.title = titleEl.textContent);
+    }
     wireEditableImage(document.getElementById("founderPhotoEl"), "founder");
   }
 }
