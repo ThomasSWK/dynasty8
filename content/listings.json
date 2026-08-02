@@ -1,19 +1,6 @@
 {
   "items": [
     {
-      "id": "loft-vercetti",
-      "category": "Appartement",
-      "transaction": "Location",
-      "title": "Loft Vercetti",
-      "location": "Vinewood Hills",
-      "price": "2 400 $ / mois",
-      "surface": "95",
-      "pieces": "2",
-      "sdb": "1",
-      "desc": "Loft lumineux au cœur de Vinewood Hills, entièrement rénové. Grand séjour ouvert, cuisine équipée et terrasse privative. Idéal pour une clientèle exigeante recherchant calme et prestige.",
-      "images": []
-    },
-    {
       "id": "garage-del-perro",
       "category": "Garage",
       "transaction": "Vente",
@@ -25,6 +12,21 @@
       "sdb": "",
       "desc": "Garage sécurisé de 6 places au cœur de Del Perro, idéal pour stocker et entretenir une collection de véhicules à l'abri des regards.",
       "images": []
+    },
+    {
+      "id": "aqua-msc25qnd",
+      "category": "Appartement",
+      "transaction": "Location",
+      "title": "Aqua",
+      "location": "San Andreas",
+      "price": "à partir de 2000$/semaine",
+      "surface": "110",
+      "pieces": "1",
+      "sdb": "",
+      "desc": "Un intérieur frais et apaisant, où le turquoise rencontre le gris et le bois clair. Lumineux, élégant et parfaitement équilibré — presque aussi relaxant qu’une journée au bord de l’eau.",
+      "images": [
+        "https://i.ibb.co/BvvYPzQ/Capture-d-cran-2026-08-01-205330.png"
+      ]
     }
   ]
 }
