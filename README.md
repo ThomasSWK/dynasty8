@@ -36,7 +36,9 @@ Chaque bien dans `content/listings.json` (tableau `items`) a la forme :
 ```
 - `category` : `Appartement`, `Maison`, `Entrepôt` ou `Garage` — sert aux filtres de la page.
 - `price` est du texte libre (vous choisissez le format : "85 000 $", "2 400 $ / mois", "À partir de 120 000 $", etc.).
-- Les photos sont des **liens externes** (Imgur, Discord CDN, etc.) — pas d'upload de fichier, on colle les URLs dans le formulaire admin (une par ligne).
+- Les photos peuvent être **importées directement depuis votre ordinateur** (le formulaire admin les envoie dans `images/uploads/` du dépôt via l'API GitHub) **ou** être des liens externes (Imgur, Discord CDN, etc.) collés dans le champ "URLs". Les deux méthodes peuvent être combinées sur un même bien.
+
+De la même façon, `content/site.json` a un champ `founder` (photo, nom, titre) affiché dans la section "L'agence" — la photo se met à jour depuis le formulaire "Modifier le contenu" (upload ou chemin manuel).
 
 ## Mise en route
 

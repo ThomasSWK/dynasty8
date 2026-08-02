@@ -310,11 +310,17 @@
   .about{background:var(--charcoal-light); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
   .about-inner{max-width:760px;margin:0 auto;text-align:center;}
   .about-inner p{color:var(--cream-dim);line-height:1.85;font-size:1.02rem;}
+  .founder{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:16px;}
+  .founder img{
+    width:150px;height:150px;object-fit:cover;border-radius:50%;
+    border:2px solid var(--gold); box-shadow:0 0 30px rgba(201,162,39,0.2);
+  }
+  .founder-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold-light);font-weight:600;}
 
   /* CONTACT */
   .contact-grid{
-    max-width:900px;margin:0 auto;
-    display:grid;grid-template-columns:1fr 1fr;gap:50px;
+    max-width:480px;margin:0 auto;
+    display:grid;grid-template-columns:1fr;gap:50px;
   }
   .contact-card{
     background:var(--charcoal); border:1px solid var(--line); padding:36px;
@@ -403,6 +409,7 @@
     <h2 style="font-size:2.2rem;margin:14px 0 20px;">Dynasty 8</h2>
     <p id="aboutTextEl">Chargement...</p>
     <div class="divider">◆</div>
+    <div class="founder" id="founderBlock"></div>
     <div id="editContentToolbar"></div>
   </div>
 </section>
@@ -419,15 +426,6 @@
       <div class="contact-row">📍 <span id="agenceAdresse"></span></div>
       <div class="contact-row">📞 <span id="agenceTel"></span></div>
       <div class="contact-row">✉️ <span id="agenceEmail"></span></div>
-    </div>
-    <div class="contact-card">
-      <h3>Envoyer un message</h3>
-      <form onsubmit="event.preventDefault(); alert('Message envoyé ! (démo — à connecter à un service d\'envoi)');">
-        <input type="text" placeholder="Votre nom" required>
-        <input type="email" placeholder="Votre email" required>
-        <textarea placeholder="Votre message" required></textarea>
-        <button type="submit">Envoyer</button>
-      </form>
     </div>
   </div>
 </section>
@@ -453,7 +451,6 @@
       <div class="modal-specs" id="modalSpecs"></div>
       <div class="modal-price" id="modalPrice"></div>
       <p class="desc" id="modalDesc"></p>
-      <button class="contact-btn" onclick="document.getElementById('modalOverlay').classList.remove('open'); document.getElementById('contact').scrollIntoView({behavior:'smooth'});">Demander une visite</button>
     </div>
   </div>
 </div>

@@ -57,6 +57,20 @@ function applySiteContent() {
     document.getElementById("agenceTel").textContent = c.contact.telephone || "";
     document.getElementById("agenceEmail").textContent = c.contact.email || "";
   }
+  renderFounderBlock();
+}
+
+function renderFounderBlock() {
+  const founder = SITE_CONTENT.founder;
+  const el = document.getElementById("founderBlock");
+  if (!founder || (!founder.name && !founder.photo)) {
+    el.innerHTML = "";
+    return;
+  }
+  el.innerHTML = `
+    ${founder.photo ? `<img src="${escapeHtml(founder.photo)}" alt="${escapeHtml(founder.name || "")}">` : ""}
+    ${founder.name ? `<div class="founder-name">${escapeHtml(founder.name)}${founder.title ? `, ${escapeHtml(founder.title)}` : ""}</div>` : ""}
+  `;
 }
 
 /* ---------- Navigation / menu mobile ---------- */
@@ -300,7 +314,10 @@ function injectListingFormModal() {
           <label>Description</label>
           <textarea id="lf-desc" rows="3" required></textarea>
 
-          <label>Photos (une URL par ligne)</label>
+          <label>Importer des photos (depuis votre ordinateur)</label>
+          <input type="file" id="lf-image-files" accept="image/*" multiple>
+
+          <label>Ou coller des URLs de photos (une par ligne)</label>
           <textarea id="lf-images" rows="3" placeholder="https://..."></textarea>
 
           <input type="hidden" id="lf-id">
@@ -341,6 +358,7 @@ function openListingForm(id) {
   document.getElementById("lf-sdb").value = item ? item.sdb : "";
   document.getElementById("lf-desc").value = item ? item.desc : "";
   document.getElementById("lf-images").value = item && item.images ? item.images.join("\n") : "";
+  document.getElementById("lf-image-files").value = "";
   document.getElementById("listingFormStatus").textContent = "";
   document.getElementById("listingFormModal").classList.add("open");
 }
@@ -354,6 +372,33 @@ function slugify(str) {
     .replace(/(^-|-$)/g, "");
 }
 
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(",")[1]);
+    reader.onerror = () => reject(new Error("Impossible de lire le fichier " + file.name));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function uploadImageFile(file, prefix) {
+  const base64 = await fileToBase64(file);
+  const ext = (file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+  const path = `images/uploads/${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}.${ext}`;
+  await ghPutRawFile(path, base64, `Ajout de la photo ${file.name}`);
+  return path;
+}
+
+async function uploadImageFiles(fileInput, prefix, status) {
+  const files = Array.from(fileInput.files || []);
+  const uploaded = [];
+  for (let i = 0; i < files.length; i++) {
+    if (status) status.textContent = `Envoi des photos (${i + 1}/${files.length})...`;
+    uploaded.push(await uploadImageFile(files[i], prefix));
+  }
+  return uploaded;
+}
+
 async function handleListingSubmit(e) {
   e.preventDefault();
   ensureGithubToken();
@@ -363,6 +408,23 @@ async function handleListingSubmit(e) {
   const isNew = !existingId;
   const title = document.getElementById("lf-title").value.trim();
   const id = existingId || `${slugify(title) || "bien"}-${Date.now().toString(36)}`;
+
+  const status = document.getElementById("listingFormStatus");
+  status.textContent = "";
+
+  const urlImages = document
+    .getElementById("lf-images")
+    .value.split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  let uploadedImages = [];
+  try {
+    uploadedImages = await uploadImageFiles(document.getElementById("lf-image-files"), id, status);
+  } catch (err) {
+    status.textContent = "Erreur d'envoi des photos : " + err.message;
+    return;
+  }
 
   const newItem = {
     id,
@@ -375,14 +437,9 @@ async function handleListingSubmit(e) {
     pieces: document.getElementById("lf-pieces").value.trim(),
     sdb: document.getElementById("lf-sdb").value.trim(),
     desc: document.getElementById("lf-desc").value.trim(),
-    images: document
-      .getElementById("lf-images")
-      .value.split("\n")
-      .map((s) => s.trim())
-      .filter(Boolean),
+    images: [...uploadedImages, ...urlImages],
   };
 
-  const status = document.getElementById("listingFormStatus");
   status.textContent = "Enregistrement en cours...";
 
   try {
@@ -465,6 +522,16 @@ function injectContentFormModal() {
           <label>Logo (chemin ou URL)</label>
           <input type="text" id="cf-logo">
 
+          <label>Nom de la fondatrice / dirigeante</label>
+          <input type="text" id="cf-founderName">
+
+          <label>Titre (ex: CEO of Dynasty 8)</label>
+          <input type="text" id="cf-founderTitle">
+
+          <label>Photo de la fondatrice</label>
+          <input type="file" id="cf-founderPhotoFile" accept="image/*">
+          <input type="hidden" id="cf-founderPhotoCurrent">
+
           <button type="submit">Enregistrer</button>
           <p class="admin-status" id="contentFormStatus"></p>
         </form>
@@ -494,6 +561,11 @@ function openContentForm() {
   document.getElementById("cf-contactEmail").value = contact.email || "";
   document.getElementById("cf-footerText").value = c.footerText || "";
   document.getElementById("cf-logo").value = c.logo || "images/logo.png";
+  const founder = c.founder || {};
+  document.getElementById("cf-founderName").value = founder.name || "";
+  document.getElementById("cf-founderTitle").value = founder.title || "";
+  document.getElementById("cf-founderPhotoCurrent").value = founder.photo || "";
+  document.getElementById("cf-founderPhotoFile").value = "";
   document.getElementById("contentFormStatus").textContent = "";
   document.getElementById("contentFormModal").classList.add("open");
 }
@@ -504,7 +576,19 @@ async function handleContentSubmit(e) {
   if (!getGithubToken()) return;
 
   const status = document.getElementById("contentFormStatus");
-  status.textContent = "Enregistrement...";
+  status.textContent = "";
+
+  let founderPhoto = document.getElementById("cf-founderPhotoCurrent").value;
+  const founderPhotoFile = document.getElementById("cf-founderPhotoFile").files[0];
+  if (founderPhotoFile) {
+    try {
+      status.textContent = "Envoi de la photo...";
+      founderPhoto = await uploadImageFile(founderPhotoFile, "founder");
+    } catch (err) {
+      status.textContent = "Erreur d'envoi de la photo : " + err.message;
+      return;
+    }
+  }
 
   const updated = {
     heroTagline: document.getElementById("cf-heroTagline").value.trim(),
@@ -518,7 +602,14 @@ async function handleContentSubmit(e) {
     },
     footerText: document.getElementById("cf-footerText").value.trim(),
     logo: document.getElementById("cf-logo").value.trim(),
+    founder: {
+      photo: founderPhoto,
+      name: document.getElementById("cf-founderName").value.trim(),
+      title: document.getElementById("cf-founderTitle").value.trim(),
+    },
   };
+
+  status.textContent = "Enregistrement...";
 
   try {
     const { sha } = await ghGetFile("content/site.json");

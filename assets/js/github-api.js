@@ -51,3 +51,24 @@ async function ghPutFile(path, newData, message, sha) {
   }
   return res.json();
 }
+
+// Envoie un fichier binaire (image) déjà encodé en base64 vers un nouveau chemin du dépôt.
+async function ghPutRawFile(path, base64Content, message) {
+  const token = getGithubToken();
+  if (!token) throw new Error("Token GitHub manquant.");
+  const url = `${GH_API}/repos/${DYNASTY8_CONFIG.owner}/${DYNASTY8_CONFIG.repo}/contents/${path}`;
+  const res = await fetch(url, {
+    method: "PUT",
+    headers: { ...ghHeaders(token), "Content-Type": "application/json" },
+    body: JSON.stringify({
+      message,
+      content: base64Content,
+      branch: DYNASTY8_CONFIG.branch,
+    }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `Échec de l'envoi de l'image (${res.status})`);
+  }
+  return res.json();
+}

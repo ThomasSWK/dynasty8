@@ -9,5 +9,10 @@
     "email": "Email à compléter"
   },
   "footerText": "© 2026 Dynasty 8. Tous droits réservés.",
-  "logo": "images/logo.png"
+  "logo": "images/logo.png",
+  "founder": {
+    "photo": "",
+    "name": "Bellita S. Granger",
+    "title": "CEO of Dynasty 8"
+  }
 }
