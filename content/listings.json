@@ -606,20 +606,6 @@
       ]
     },
     {
-      "id": "garage-parking-6",
-      "category": "Garage",
-      "transaction": "Location",
-      "title": "Garage Parking 6",
-      "priceRent": 1000,
-      "priceSale": null,
-      "pieces": "1",
-      "sdb": "",
-      "desc": "Un espace sécurisé pour vos véhicules. Description complète à venir.",
-      "images": [
-        "images/uploads/garage-parking-6-01.jpg"
-      ]
-    },
-    {
       "id": "hangar-1",
       "category": "Garage",
       "transaction": "Location",
