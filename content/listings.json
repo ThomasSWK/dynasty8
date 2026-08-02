@@ -562,20 +562,6 @@
         "images/uploads/garage-large-4-06.jpg",
         "images/uploads/garage-large-4-07.jpg"
       ]
-    },
-    {
-      "id": "garage-parking-1",
-      "category": "Garage",
-      "transaction": "Location",
-      "title": "Garage Parking 1",
-      "priceRent": 1000,
-      "priceSale": null,
-      "pieces": "1",
-      "sdb": "",
-      "desc": "Un espace sécurisé pour vos véhicules. Description complète à venir.",
-      "images": [
-        "images/uploads/garage-parking-1-01.jpg"
-      ]
     }
   ]
 }
