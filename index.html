@@ -131,10 +131,6 @@
   }
   .hero-split-text .cta:hover{background:var(--gold);color:var(--black);}
 
-  .hero-founder-caption{margin-top:76px;}
-  .hero-founder-caption .fs-name{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--cream);font-weight:600;}
-  .hero-founder-caption .fs-title{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-top:6px;}
-
   .hero-split-photo{
     position:relative; align-self:start;
     border:1px solid var(--gold);
@@ -142,12 +138,18 @@
     height:76vh; min-height:480px; max-height:800px;
     box-shadow:0 30px 70px rgba(0,0,0,0.55);
   }
+  #founderPhotoWrap{position:absolute;inset:0;}
   .hero-split-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
   .hero-split-photo::after{
-    content:"";position:absolute;left:0;right:0;bottom:0;height:45%;
+    content:"";position:absolute;left:0;right:0;bottom:0;height:45%;z-index:1;
     background:linear-gradient(180deg, transparent, var(--black) 94%);
     pointer-events:none;
   }
+  .hero-founder-caption{
+    position:absolute; left:28px; bottom:26px; z-index:2; text-align:left;
+  }
+  .hero-founder-caption .fs-name{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--cream);font-weight:600;}
+  .hero-founder-caption .fs-title{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-top:6px;}
   .fs-photo-placeholder{
     width:100%;height:100%;display:flex;align-items:center;justify-content:center;
     border:2px dashed var(--line);color:var(--cream-dim);cursor:pointer;
@@ -423,8 +425,8 @@
     .hero-split-inner{grid-template-columns:1fr;gap:36px;}
     .hero-split-text{align-items:center;text-align:center;}
     .hero-split-text .tag{max-width:none;}
-    .hero-founder-caption{margin-top:0;text-align:center;}
     .hero-split-photo{order:-1;height:52vh;min-height:360px;width:100%;}
+    .hero-founder-caption{left:18px;bottom:18px;}
   }
 </style>
 </head>
@@ -455,9 +457,11 @@
       <p class="tag" id="heroTaglineEl">Chargement...</p>
       <div class="services" id="servicesLineEl"></div>
       <a href="#biens" class="cta">Découvrir nos biens</a>
+    </div>
+    <div class="hero-split-photo">
+      <div id="founderPhotoWrap"></div>
       <div class="hero-founder-caption" id="founderCaption"></div>
     </div>
-    <div class="hero-split-photo" id="founderPhotoWrap"></div>
   </div>
 </section>
 
