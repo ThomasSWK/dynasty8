@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "id": "loft-vercetti",
+      "category": "Appartement",
+      "transaction": "Location",
+      "title": "Loft Vercetti",
+      "location": "Vinewood Hills",
+      "price": "2 400 $ / mois",
+      "surface": "95",
+      "pieces": "2",
+      "sdb": "1",
+      "desc": "Loft lumineux au cœur de Vinewood Hills, entièrement rénové. Grand séjour ouvert, cuisine équipée et terrasse privative. Idéal pour une clientèle exigeante recherchant calme et prestige.",
+      "images": []
+    },
+    {
+      "id": "garage-del-perro",
+      "category": "Garage",
+      "transaction": "Vente",
+      "title": "Garage Del Perro",
+      "location": "Del Perro",
+      "price": "85 000 $",
+      "surface": "40",
+      "pieces": "6",
+      "sdb": "",
+      "desc": "Garage sécurisé de 6 places au cœur de Del Perro, idéal pour stocker et entretenir une collection de véhicules à l'abri des regards.",
+      "images": []
+    }
+  ]
+}

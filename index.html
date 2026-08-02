@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynasty 8 — Agence Immobilière</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a;
+    --charcoal:#151412;
+    --charcoal-light:#1e1c18;
+    --gold:#c9a227;
+    --gold-light:#e8c766;
+    --gold-dim:#8a7020;
+    --cream:#f2ede1;
+    --cream-dim:#b8b2a3;
+    --line: rgba(201,162,39,0.25);
+    --danger:#c0392b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  .hidden{display:none !important;}
+  body{
+    background:var(--black);
+    color:var(--cream);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond', serif;}
+  a{color:inherit; text-decoration:none;}
+  .eyebrow{
+    font-size:0.72rem;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+  }
+  .divider{
+    display:flex;align-items:center;justify-content:center;gap:14px;
+    color:var(--gold);
+    margin:18px 0;
+  }
+  .divider::before,.divider::after{
+    content:"";
+    height:1px;width:60px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  /* NAV */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 5%;
+    background:rgba(10,10,10,0.75);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    transition:padding 0.3s ease;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand img{height:44px;width:44px;object-fit:contain;}
+  .brand span{font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:0.12em;color:var(--gold-light);}
+  nav ul{display:flex;align-items:center;list-style:none;gap:36px;}
+  nav a{
+    font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--cream-dim); transition:color 0.25s;
+    position:relative;
+  }
+  nav a:hover{color:var(--gold-light);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--gold);font-size:1.6rem;cursor:pointer;}
+
+  #adminNavItem a{border:1px solid var(--line);padding:7px 14px;}
+  #adminNavItem a:hover{border-color:var(--gold);}
+  .admin-badge{
+    background:var(--gold); color:var(--black); font-weight:600;
+    font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase;
+    padding:6px 12px;
+  }
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:140px 6% 80px;
+    background:
+      radial-gradient(ellipse at 50% 20%, rgba(201,162,39,0.10), transparent 60%),
+      linear-gradient(180deg, #0a0a0a 0%, #0c0b09 100%);
+  }
+  .hero-logo{width:150px;height:150px;object-fit:contain;margin-bottom:22px;filter:drop-shadow(0 0 30px rgba(201,162,39,0.25));}
+  .hero h1{
+    font-size:clamp(2.6rem, 6vw, 5rem);
+    letter-spacing:0.14em;
+    font-weight:600;
+    color:var(--cream);
+    line-height:1.05;
+  }
+  .hero h1 span{color:var(--gold-light);}
+  .hero p.tag{
+    margin-top:18px;
+    font-size:1.05rem;
+    letter-spacing:0.08em;
+    color:var(--cream-dim);
+    max-width:560px;
+  }
+  .hero .services{
+    margin-top:26px;
+    font-size:0.85rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  .hero .cta{
+    margin-top:44px;
+    display:inline-flex;align-items:center;gap:10px;
+    padding:15px 38px;
+    border:1px solid var(--gold);
+    color:var(--gold-light);
+    font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;
+    transition:all 0.3s;
+  }
+  .hero .cta:hover{background:var(--gold);color:var(--black);}
+
+  /* SECTION shell */
+  section{padding:110px 6%;}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 60px;}
+  .section-head h2{font-size:2.6rem;color:var(--cream);font-weight:600;letter-spacing:0.03em;}
+  .section-head p{color:var(--cream-dim);margin-top:14px;font-size:0.98rem;line-height:1.6;}
+
+  /* ADMIN toolbar (add listing) */
+  .admin-toolbar{text-align:center;margin-bottom:40px;}
+  .ghost-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 26px;border:1px solid var(--line);background:transparent;
+    color:var(--cream-dim); font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;
+    cursor:pointer;transition:all 0.25s;font-family:'Jost',sans-serif;
+  }
+  .ghost-btn:hover{border-color:var(--gold);color:var(--gold-light);}
+
+  /* FILTERS */
+  .filters{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:10px;
+    margin-bottom:50px;
+  }
+  .filter-btn{
+    padding:9px 22px;
+    border:1px solid var(--line);
+    font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--cream-dim);
+    cursor:pointer;background:transparent;
+    transition:all 0.25s;
+  }
+  .filter-btn:hover, .filter-btn.active{
+    border-color:var(--gold); color:var(--gold-light); background:rgba(201,162,39,0.08);
+  }
+
+  /* GRID */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(320px,1fr));
+    gap:34px;
+    max-width:1320px;margin:0 auto;
+  }
+  .card{
+    background:var(--charcoal);
+    border:1px solid var(--line);
+    cursor:pointer;
+    overflow:hidden;
+    position:relative;
+    transition:transform 0.35s, border-color 0.35s, box-shadow 0.35s;
+  }
+  .card:hover{
+    transform:translateY(-6px);
+    border-color:var(--gold);
+    box-shadow:0 20px 40px rgba(0,0,0,0.5);
+  }
+  .card-img{
+    height:230px; position:relative; overflow:hidden;
+    background:linear-gradient(135deg,#221c10,#0a0a0a);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .card-img img{width:100%;height:100%;object-fit:cover;}
+  .card-img .ph-icon{width:52px;height:52px;opacity:0.35;}
+  .badge{
+    position:absolute;top:14px;left:14px;
+    background:rgba(10,10,10,0.75);
+    border:1px solid var(--gold);
+    color:var(--gold-light);
+    font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;
+    padding:5px 12px;
+  }
+  .price-tag{
+    position:absolute;bottom:14px;right:14px;
+    background:rgba(10,10,10,0.85);
+    color:var(--gold-light);
+    font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;
+    padding:5px 14px;border:1px solid var(--line);
+  }
+  .card-body{padding:22px 24px 26px;}
+  .card-body h3{font-size:1.4rem;color:var(--cream);font-weight:600;margin-bottom:4px;}
+  .card-body .loc{font-size:0.78rem;color:var(--gold-dim);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px;}
+  .specs{display:flex;gap:16px;font-size:0.82rem;color:var(--cream-dim);}
+  .specs span{display:flex;align-items:center;gap:6px;}
+
+  .card-admin-actions{
+    position:absolute; top:14px; right:14px; z-index:2;
+    display:flex; gap:6px;
+  }
+  .card-admin-actions button{
+    width:30px;height:30px;
+    background:rgba(10,10,10,0.85); border:1px solid var(--gold);
+    color:var(--gold-light); cursor:pointer; font-size:0.85rem;
+  }
+  .card-admin-actions button.danger{border-color:var(--danger);color:#e2897d;}
+
+  /* MODAL (shared: gallery viewer + admin forms) */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,0.88);
+    z-index:200; display:none; align-items:flex-start; justify-content:center;
+    overflow-y:auto; padding:60px 4%;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:var(--charcoal); max-width:960px; width:100%;
+    border:1px solid var(--gold);
+    animation:fadeUp 0.35s ease;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);}}
+  .modal-close{
+    position:sticky; top:0; z-index:5;
+    display:flex;justify-content:flex-end;
+    padding:14px 18px 0;
+  }
+  .modal-close button{
+    background:var(--black); border:1px solid var(--gold); color:var(--gold-light);
+    width:36px;height:36px; cursor:pointer; font-size:1.1rem;
+  }
+  .gallery-main{
+    height:440px; background:linear-gradient(135deg,#221c10,#0a0a0a);
+    display:flex;align-items:center;justify-content:center;position:relative;
+    overflow:hidden;
+  }
+  .gallery-main img{width:100%;height:100%;object-fit:cover;}
+  .gallery-nav{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:42px;height:42px; background:rgba(10,10,10,0.6); border:1px solid var(--gold);
+    color:var(--gold-light); display:flex;align-items:center;justify-content:center;
+    cursor:pointer; font-size:1.2rem; user-select:none;
+  }
+  .gallery-nav.prev{left:16px;} .gallery-nav.next{right:16px;}
+  .gallery-count{
+    position:absolute;bottom:14px;right:16px;
+    background:rgba(10,10,10,0.7);color:var(--gold-light);
+    font-size:0.78rem;padding:4px 10px;border:1px solid var(--line);
+  }
+  .thumbs{display:flex;gap:8px;padding:14px 18px;overflow-x:auto;}
+  .thumbs img{
+    width:70px;height:56px;object-fit:cover;cursor:pointer;
+    border:1px solid var(--line); opacity:0.55; transition:0.25s;
+    flex-shrink:0;
+  }
+  .thumbs img.active, .thumbs img:hover{opacity:1;border-color:var(--gold);}
+  .modal-body{padding:30px 34px 40px;}
+  .modal-body .loc{font-size:0.8rem;color:var(--gold-dim);letter-spacing:0.1em;text-transform:uppercase;}
+  .modal-body h2{font-size:2.1rem;color:var(--cream);margin:6px 0 18px;font-weight:600;}
+  .modal-specs{
+    display:flex;gap:28px;flex-wrap:wrap;
+    padding:18px 0; margin-bottom:22px;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .modal-specs div{text-align:center;}
+  .modal-specs .num{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--gold-light);font-weight:600;}
+  .modal-specs .lbl{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cream-dim);}
+  .modal-body .desc{color:var(--cream-dim);line-height:1.75;font-size:0.98rem;margin-bottom:26px;}
+  .modal-price{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold-light);font-weight:600;margin-bottom:20px;}
+  .contact-btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 32px;background:var(--gold);color:var(--black);
+    font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;
+    border:none;cursor:pointer;transition:0.25s;
+  }
+  .contact-btn:hover{background:var(--gold-light);}
+
+  /* Admin form modal (login, add/edit listing, edit content) */
+  .admin-box{
+    background:var(--charcoal); max-width:520px; width:100%;
+    border:1px solid var(--gold); padding:34px; position:relative;
+    animation:fadeUp 0.35s ease;
+  }
+  .admin-box h3{color:var(--gold-light);font-size:1.6rem;margin-bottom:20px;}
+  .admin-box .modal-close{position:absolute;top:10px;right:10px;padding:0;}
+  .admin-box form{display:flex;flex-direction:column;gap:12px;}
+  .admin-box label{
+    font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--gold-dim); margin-top:6px;
+  }
+  .admin-box select{
+    background:var(--charcoal); border:1px solid var(--line); color:var(--cream);
+    padding:13px 16px; font-family:'Jost',sans-serif; font-size:0.9rem;
+  }
+  .admin-box .field-row{display:flex; gap:12px;}
+  .admin-box .field-row > *{flex:1;}
+  .admin-status{font-size:0.8rem;color:var(--cream-dim);margin-top:8px;min-height:1.2em;}
+  .admin-error{font-size:0.8rem;color:#e2897d;}
+
+  /* ABOUT */
+  .about{background:var(--charcoal-light); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .about-inner{max-width:760px;margin:0 auto;text-align:center;}
+  .about-inner p{color:var(--cream-dim);line-height:1.85;font-size:1.02rem;}
+
+  /* CONTACT */
+  .contact-grid{
+    max-width:900px;margin:0 auto;
+    display:grid;grid-template-columns:1fr 1fr;gap:50px;
+  }
+  .contact-card{
+    background:var(--charcoal); border:1px solid var(--line); padding:36px;
+  }
+  .contact-card h3{font-size:1.5rem;color:var(--gold-light);margin-bottom:18px;font-weight:600;}
+  .contact-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;color:var(--cream-dim);font-size:0.95rem;}
+  form{display:flex;flex-direction:column;gap:14px;}
+  form input, form textarea{
+    background:var(--charcoal); border:1px solid var(--line); color:var(--cream);
+    padding:13px 16px; font-family:'Jost',sans-serif; font-size:0.9rem;
+  }
+  form input:focus, form textarea:focus, form select:focus{outline:none;border-color:var(--gold);}
+  form textarea{resize:vertical;min-height:110px;}
+  form button{
+    background:var(--gold); color:var(--black); border:none; padding:14px;
+    font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;
+    cursor:pointer; transition:0.25s;
+  }
+  form button:hover{background:var(--gold-light);}
+
+  footer{
+    text-align:center; padding:40px 6% 30px;
+    border-top:1px solid var(--line);
+    color:var(--cream-dim); font-size:0.8rem;letter-spacing:0.05em;
+  }
+  footer .eyebrow{display:block;margin-bottom:10px;}
+
+  @media(max-width:820px){
+    nav ul{
+      position:fixed; top:78px; right:0; height:calc(100vh - 78px); width:240px;
+      background:var(--black); flex-direction:column; align-items:flex-start; gap:0;
+      border-left:1px solid var(--line);
+      transform:translateX(100%); transition:transform 0.3s;
+      padding-top:20px;
+    }
+    nav ul.open{transform:translateX(0);}
+    nav ul li{padding:16px 24px;border-bottom:1px solid var(--line);width:100%;}
+    .nav-toggle{display:block;}
+    .contact-grid{grid-template-columns:1fr;}
+    .admin-box{padding:26px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="images/logo.png" id="brandLogoEl" alt="Dynasty 8">
+    <span>DYNASTY 8</span>
+  </div>
+  <nav>
+    <ul id="navList">
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#biens">Nos biens</a></li>
+      <li><a href="#agence">L'agence</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li id="adminNavItem"><a href="#" id="adminToggleLink">🔒 Admin</a></li>
+    </ul>
+  </nav>
+  <button class="nav-toggle" id="navToggle">☰</button>
+</header>
+
+<section class="hero" id="accueil">
+  <img src="images/logo.png" class="hero-logo" id="heroLogoEl" alt="Dynasty 8">
+  <h1>DYNASTY <span>8</span></h1>
+  <p class="tag" id="heroTaglineEl">Chargement...</p>
+  <div class="services" id="servicesLineEl"></div>
+  <a href="#biens" class="cta">Découvrir nos biens</a>
+</section>
+
+<section id="biens">
+  <div class="section-head">
+    <span class="eyebrow">Notre sélection</span>
+    <h2>Les biens du moment</h2>
+    <p>Chaque appartement est visité, photographié et décrit avec soin par notre équipe avant sa mise en ligne.</p>
+  </div>
+
+  <div class="admin-toolbar" id="adminToolbar"></div>
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="listingsGrid"></div>
+</section>
+
+<section class="about" id="agence">
+  <div class="about-inner">
+    <span class="eyebrow">L'agence</span>
+    <h2 style="font-size:2.2rem;margin:14px 0 20px;">Dynasty 8</h2>
+    <p id="aboutTextEl">Chargement...</p>
+    <div class="divider">◆</div>
+    <div id="editContentToolbar"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-head">
+    <span class="eyebrow">Nous contacter</span>
+    <h2>Parlons de votre projet</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>Coordonnées</h3>
+      <div class="contact-row">👤 <span id="agenceContact"></span></div>
+      <div class="contact-row">📍 <span id="agenceAdresse"></span></div>
+      <div class="contact-row">📞 <span id="agenceTel"></span></div>
+      <div class="contact-row">✉️ <span id="agenceEmail"></span></div>
+    </div>
+    <div class="contact-card">
+      <h3>Envoyer un message</h3>
+      <form onsubmit="event.preventDefault(); alert('Message envoyé ! (démo — à connecter à un service d\'envoi)');">
+        <input type="text" placeholder="Votre nom" required>
+        <input type="email" placeholder="Votre email" required>
+        <textarea placeholder="Votre message" required></textarea>
+        <button type="submit">Envoyer</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="eyebrow">Dynasty 8 — Agence Immobilière</span>
+  <span id="footerTextEl"></span>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-close"><button id="modalCloseBtn">✕</button></div>
+    <div class="gallery-main">
+      <img id="galleryImg" src="" alt="">
+      <div class="gallery-nav prev" id="galPrev">‹</div>
+      <div class="gallery-nav next" id="galNext">›</div>
+      <div class="gallery-count" id="galCount"></div>
+    </div>
+    <div class="thumbs" id="thumbsRow"></div>
+    <div class="modal-body">
+      <div class="loc" id="modalLoc"></div>
+      <h2 id="modalTitle"></h2>
+      <div class="modal-specs" id="modalSpecs"></div>
+      <div class="modal-price" id="modalPrice"></div>
+      <p class="desc" id="modalDesc"></p>
+      <button class="contact-btn" onclick="document.getElementById('modalOverlay').classList.remove('open'); document.getElementById('contact').scrollIntoView({behavior:'smooth'});">Demander une visite</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="loginModal">
+  <div class="admin-box">
+    <div class="modal-close"><button id="loginCloseBtn">✕</button></div>
+    <h3>Accès administrateur</h3>
+    <form id="loginForm">
+      <label>Mot de passe</label>
+      <input type="password" id="loginPassword" required>
+      <button type="submit">Connexion</button>
+      <p class="admin-error hidden" id="loginError">Mot de passe incorrect.</p>
+    </form>
+  </div>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/crypto-utils.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/github-api.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
