@@ -13,7 +13,10 @@ function ghHeaders(token) {
 }
 
 function b64ToUtf8(b64) {
-  return decodeURIComponent(escape(atob(b64.replace(/\n/g, ""))));
+  const text = decodeURIComponent(escape(atob(b64.replace(/\n/g, ""))));
+  // Retire un éventuel BOM en tête de fichier (ex. fichier réenregistré par un éditeur
+  // qui en ajoute un), qui ferait échouer JSON.parse sinon.
+  return text.charCodeAt(0) === 0xfeff ? text.slice(1) : text;
 }
 
 function utf8ToB64(str) {
