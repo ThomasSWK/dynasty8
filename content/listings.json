@@ -214,14 +214,14 @@
       "id": "apartment-penthouse",
       "category": "Appartement",
       "transaction": "Location",
-      "title": "Apartment Penthouse",
+      "title": "KALEIDOSCOPE",
       "priceRent": 1000,
       "priceSale": null,
-      "pieces": "1",
-      "sdb": "",
-      "desc": "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+      "pieces": "2",
+      "sdb": "3",
+      "desc": "Un déluge de couleurs, de velours et de lumières pour un intérieur qui refuse catégoriquement la discrétion. Entre suites extravagantes, bar privé et espace bien-être en marbre, la gamme KALEIDOSCOPE transforme chaque soirée en événement — lunettes de soleil recommandées, même à l’intérieur.",
       "images": [
-        "images/uploads/apartment-penthouse-01.jpg",
+        "images/uploads/apartment-penthouse-10.jpg",
         "images/uploads/apartment-penthouse-02.jpg",
         "images/uploads/apartment-penthouse-03.jpg",
         "images/uploads/apartment-penthouse-04.jpg",
@@ -230,13 +230,13 @@
         "images/uploads/apartment-penthouse-07.jpg",
         "images/uploads/apartment-penthouse-08.jpg",
         "images/uploads/apartment-penthouse-09.jpg",
-        "images/uploads/apartment-penthouse-10.jpg",
         "images/uploads/apartment-penthouse-11.jpg",
         "images/uploads/apartment-penthouse-12.jpg",
         "images/uploads/apartment-penthouse-13.jpg",
         "images/uploads/apartment-penthouse-14.jpg",
         "images/uploads/apartment-penthouse-15.jpg",
-        "images/uploads/apartment-penthouse-16.jpg"
+        "images/uploads/apartment-penthouse-16.jpg",
+        "images/uploads/apartment-penthouse-01.jpg"
       ]
     },
     {
