@@ -350,15 +350,15 @@
       "id": "warehouse-medium",
       "category": "Entrepôt",
       "transaction": "Location",
-      "title": "Warehouse Medium",
+      "title": "FORGE",
       "priceRent": 1000,
       "priceSale": null,
       "pieces": "1",
       "sdb": "",
-      "desc": "Un entrepôt fonctionnel, idéal pour le stockage ou une activité commerciale. Description complète à venir.",
+      "desc": "Un entrepôt de taille intermédiaire, fonctionnel et parfaitement adapté à une activité en développement. Ses rayonnages structurés et ses zones de circulation offrent un bel équilibre entre capacité et praticité — assez grand pour voir venir, sans avoir besoin d’un GPS pour retrouver une palette.",
       "images": [
-        "images/uploads/warehouse-medium-01.jpg",
-        "images/uploads/warehouse-medium-02.jpg"
+        "images/uploads/warehouse-medium-02.jpg",
+        "images/uploads/warehouse-medium-01.jpg"
       ]
     },
     {
