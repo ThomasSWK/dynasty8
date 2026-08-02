@@ -1,18 +1,6 @@
 {
   "items": [
     {
-      "id": "garage-del-perro",
-      "category": "Garage",
-      "transaction": "Vente",
-      "title": "Garage Del Perro",
-      "priceRent": null,
-      "priceSale": 85000,
-      "pieces": "6",
-      "sdb": "",
-      "desc": "Garage sécurisé de 6 places au cœur de Del Perro, idéal pour stocker et entretenir une collection de véhicules à l'abri des regards.",
-      "images": []
-    },
-    {
       "id": "aqua-msc785sr",
       "category": "Appartement",
       "transaction": "Location",
