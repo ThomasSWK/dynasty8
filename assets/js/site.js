@@ -16,7 +16,7 @@ async function initSite() {
   wireLoginModal();
   wireGalleryModal();
   injectListingFormModal();
-  injectContentFormModal();
+  wireAdminSaveBar();
   await loadData();
 }
 
@@ -27,6 +27,8 @@ async function loadData() {
       fetch("content/listings.json", { cache: "no-store" }),
     ]);
     SITE_CONTENT = await siteRes.json();
+    SITE_CONTENT.contact = SITE_CONTENT.contact || {};
+    SITE_CONTENT.founder = SITE_CONTENT.founder || {};
     const listingsData = await listingsRes.json();
     LISTINGS = listingsData.items || [];
   } catch (e) {
@@ -35,7 +37,7 @@ async function loadData() {
   applySiteContent();
   renderAdminNavState();
   renderAdminToolbar();
-  renderEditContentToolbar();
+  renderAdminSaveBar();
   renderFilters();
   renderGrid();
 }
@@ -43,34 +45,154 @@ async function loadData() {
 function applySiteContent() {
   const c = SITE_CONTENT;
   if (!c) return;
-  if (c.heroTagline) document.getElementById("heroTaglineEl").textContent = c.heroTagline;
-  if (c.servicesLine) document.getElementById("servicesLineEl").textContent = c.servicesLine;
-  if (c.aboutText) document.getElementById("aboutTextEl").textContent = c.aboutText;
-  if (c.footerText) document.getElementById("footerTextEl").textContent = c.footerText;
+  document.getElementById("heroTaglineEl").textContent = c.heroTagline || "";
+  document.getElementById("servicesLineEl").textContent = c.servicesLine || "";
+  document.getElementById("aboutTextEl").textContent = c.aboutText || "";
+  document.getElementById("footerTextEl").textContent = c.footerText || "";
   if (c.logo) {
     document.getElementById("brandLogoEl").src = c.logo;
     document.getElementById("heroLogoEl").src = c.logo;
   }
-  if (c.contact) {
-    document.getElementById("agenceContact").textContent = c.contact.nom || "";
-    document.getElementById("agenceAdresse").textContent = c.contact.adresse || "";
-    document.getElementById("agenceTel").textContent = c.contact.telephone || "";
-    document.getElementById("agenceEmail").textContent = c.contact.email || "";
-  }
+  document.getElementById("agenceContact").textContent = c.contact.nom || "";
+  document.getElementById("agenceAdresse").textContent = c.contact.adresse || "";
+  document.getElementById("agenceTel").textContent = c.contact.telephone || "";
+  document.getElementById("agenceEmail").textContent = c.contact.email || "";
   renderFounderBlock();
+  enableInlineEditing();
+}
+
+/* ---------- Admin : édition du contenu directement sur la page ---------- */
+
+const EDITABLE_TEXT_FIELDS = [
+  { id: "heroTaglineEl", set: (v) => (SITE_CONTENT.heroTagline = v), placeholder: "Accroche" },
+  { id: "servicesLineEl", set: (v) => (SITE_CONTENT.servicesLine = v), placeholder: "Ligne de services" },
+  { id: "aboutTextEl", set: (v) => (SITE_CONTENT.aboutText = v), placeholder: "Présentation de l'agence" },
+  { id: "agenceContact", set: (v) => (SITE_CONTENT.contact.nom = v), placeholder: "Nom du contact" },
+  { id: "agenceAdresse", set: (v) => (SITE_CONTENT.contact.adresse = v), placeholder: "Adresse" },
+  { id: "agenceTel", set: (v) => (SITE_CONTENT.contact.telephone = v), placeholder: "Téléphone" },
+  { id: "agenceEmail", set: (v) => (SITE_CONTENT.contact.email = v), placeholder: "Email" },
+  { id: "footerTextEl", set: (v) => (SITE_CONTENT.footerText = v), placeholder: "Texte du pied de page" },
+];
+
+function enableInlineEditing() {
+  const admin = isAdmin();
+  EDITABLE_TEXT_FIELDS.forEach(({ id, set, placeholder }) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.contentEditable = admin ? "true" : "false";
+    if (admin) {
+      el.dataset.placeholder = placeholder;
+      el.oninput = () => set(el.textContent);
+    } else {
+      el.oninput = null;
+      delete el.dataset.placeholder;
+    }
+  });
+
+  wireEditableImage(document.getElementById("brandLogoEl"), "logo");
+  wireEditableImage(document.getElementById("heroLogoEl"), "logo");
+}
+
+function wireEditableImage(imgEl, kind) {
+  if (!imgEl) return;
+  if (!isAdmin()) {
+    imgEl.classList.remove("editable-img");
+    imgEl.onclick = null;
+    imgEl.title = "";
+    return;
+  }
+  imgEl.classList.add("editable-img");
+  imgEl.title = "Cliquer pour changer la photo";
+  imgEl.onclick = () => triggerImageUpload(kind);
+}
+
+function triggerImageUpload(kind) {
+  ensureGithubToken();
+  if (!getGithubToken()) return;
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "image/*";
+  input.onchange = async () => {
+    const file = input.files[0];
+    if (!file) return;
+    const status = document.getElementById("adminSaveStatus");
+    status.textContent = "Envoi de la photo...";
+    try {
+      const path = await uploadImageFile(file, kind);
+      if (kind === "logo") {
+        SITE_CONTENT.logo = path;
+        document.getElementById("brandLogoEl").src = path;
+        document.getElementById("heroLogoEl").src = path;
+      } else if (kind === "founder") {
+        SITE_CONTENT.founder.photo = path;
+        renderFounderBlock();
+      }
+      status.textContent = "Photo envoyée — pensez à Enregistrer.";
+    } catch (err) {
+      status.textContent = "Erreur : " + err.message;
+    }
+  };
+  input.click();
 }
 
 function renderFounderBlock() {
-  const founder = SITE_CONTENT.founder;
+  const founder = SITE_CONTENT.founder || (SITE_CONTENT.founder = {});
   const el = document.getElementById("founderBlock");
-  if (!founder || (!founder.name && !founder.photo)) {
+  const admin = isAdmin();
+  if (!admin && !founder.name && !founder.photo) {
     el.innerHTML = "";
     return;
   }
+  const showSeparator = founder.title || admin;
   el.innerHTML = `
-    ${founder.photo ? `<img src="${escapeHtml(founder.photo)}" alt="${escapeHtml(founder.name || "")}">` : ""}
-    ${founder.name ? `<div class="founder-name">${escapeHtml(founder.name)}${founder.title ? `, ${escapeHtml(founder.title)}` : ""}</div>` : ""}
+    ${
+      founder.photo
+        ? `<img id="founderPhotoEl" src="${escapeHtml(founder.photo)}" alt="${escapeHtml(founder.name || "")}">`
+        : admin
+        ? `<div class="founder-photo-placeholder" id="founderPhotoEl">+ Photo</div>`
+        : ""
+    }
+    <div class="founder-name">
+      <span id="founderNameEl" data-placeholder="Nom">${escapeHtml(founder.name || "")}</span><span>${showSeparator ? ", " : ""}</span><span id="founderTitleEl" data-placeholder="Titre">${escapeHtml(founder.title || "")}</span>
+    </div>
   `;
+  if (admin) {
+    const nameEl = document.getElementById("founderNameEl");
+    nameEl.contentEditable = "true";
+    nameEl.oninput = () => (founder.name = nameEl.textContent);
+    const titleEl = document.getElementById("founderTitleEl");
+    titleEl.contentEditable = "true";
+    titleEl.oninput = () => (founder.title = titleEl.textContent);
+    wireEditableImage(document.getElementById("founderPhotoEl"), "founder");
+  }
+}
+
+function renderAdminSaveBar() {
+  const bar = document.getElementById("adminSaveBar");
+  const admin = isAdmin();
+  bar.classList.toggle("hidden", !admin);
+  document.body.classList.toggle("has-admin-bar", admin);
+}
+
+function wireAdminSaveBar() {
+  document.getElementById("saveContentBtn").addEventListener("click", saveSiteContent);
+}
+
+async function saveSiteContent() {
+  ensureGithubToken();
+  if (!getGithubToken()) return;
+  const status = document.getElementById("adminSaveStatus");
+  status.textContent = "Enregistrement...";
+  try {
+    const { sha } = await ghGetFile("content/site.json");
+    await ghPutFile("content/site.json", SITE_CONTENT, "Mise à jour du contenu de la page (édition en direct)", sha);
+    status.textContent = "Enregistré ✓";
+    setTimeout(() => {
+      if (status.textContent === "Enregistré ✓") status.textContent = "";
+    }, 2500);
+  } catch (err) {
+    status.textContent = "Erreur : " + err.message;
+  }
 }
 
 /* ---------- Navigation / menu mobile ---------- */
@@ -473,152 +595,6 @@ async function deleteListing(id) {
     renderGrid();
   } catch (err) {
     alert("Erreur : " + err.message);
-  }
-}
-
-/* ---------- Admin : édition du contenu de la page ---------- */
-
-function renderEditContentToolbar() {
-  const el = document.getElementById("editContentToolbar");
-  el.innerHTML = isAdmin() ? `<button class="ghost-btn" id="editContentBtn">Modifier le contenu</button>` : "";
-  if (isAdmin()) {
-    document.getElementById("editContentBtn").addEventListener("click", openContentForm);
-  }
-}
-
-function injectContentFormModal() {
-  document.body.insertAdjacentHTML(
-    "beforeend",
-    `
-    <div class="modal-overlay" id="contentFormModal">
-      <div class="admin-box">
-        <div class="modal-close"><button id="contentFormCloseBtn">✕</button></div>
-        <h3>Modifier le contenu</h3>
-        <form id="contentForm">
-          <label>Accroche (page d'accueil)</label>
-          <textarea id="cf-heroTagline" rows="2"></textarea>
-
-          <label>Ligne de services</label>
-          <input type="text" id="cf-servicesLine">
-
-          <label>Présentation de l'agence</label>
-          <textarea id="cf-aboutText" rows="4"></textarea>
-
-          <label>Nom du contact</label>
-          <input type="text" id="cf-contactNom">
-
-          <label>Adresse</label>
-          <input type="text" id="cf-contactAdresse">
-
-          <label>Téléphone</label>
-          <input type="text" id="cf-contactTelephone">
-
-          <label>Email</label>
-          <input type="text" id="cf-contactEmail">
-
-          <label>Texte du pied de page</label>
-          <input type="text" id="cf-footerText">
-
-          <label>Logo (chemin ou URL)</label>
-          <input type="text" id="cf-logo">
-
-          <label>Nom de la fondatrice / dirigeante</label>
-          <input type="text" id="cf-founderName">
-
-          <label>Titre (ex: CEO of Dynasty 8)</label>
-          <input type="text" id="cf-founderTitle">
-
-          <label>Photo de la fondatrice</label>
-          <input type="file" id="cf-founderPhotoFile" accept="image/*">
-          <input type="hidden" id="cf-founderPhotoCurrent">
-
-          <button type="submit">Enregistrer</button>
-          <p class="admin-status" id="contentFormStatus"></p>
-        </form>
-      </div>
-    </div>
-  `
-  );
-
-  document.getElementById("contentFormCloseBtn").addEventListener("click", () => {
-    document.getElementById("contentFormModal").classList.remove("open");
-  });
-  document.getElementById("contentFormModal").addEventListener("click", (e) => {
-    if (e.target.id === "contentFormModal") e.currentTarget.classList.remove("open");
-  });
-  document.getElementById("contentForm").addEventListener("submit", handleContentSubmit);
-}
-
-function openContentForm() {
-  const c = SITE_CONTENT || {};
-  const contact = c.contact || {};
-  document.getElementById("cf-heroTagline").value = c.heroTagline || "";
-  document.getElementById("cf-servicesLine").value = c.servicesLine || "";
-  document.getElementById("cf-aboutText").value = c.aboutText || "";
-  document.getElementById("cf-contactNom").value = contact.nom || "";
-  document.getElementById("cf-contactAdresse").value = contact.adresse || "";
-  document.getElementById("cf-contactTelephone").value = contact.telephone || "";
-  document.getElementById("cf-contactEmail").value = contact.email || "";
-  document.getElementById("cf-footerText").value = c.footerText || "";
-  document.getElementById("cf-logo").value = c.logo || "images/logo.png";
-  const founder = c.founder || {};
-  document.getElementById("cf-founderName").value = founder.name || "";
-  document.getElementById("cf-founderTitle").value = founder.title || "";
-  document.getElementById("cf-founderPhotoCurrent").value = founder.photo || "";
-  document.getElementById("cf-founderPhotoFile").value = "";
-  document.getElementById("contentFormStatus").textContent = "";
-  document.getElementById("contentFormModal").classList.add("open");
-}
-
-async function handleContentSubmit(e) {
-  e.preventDefault();
-  ensureGithubToken();
-  if (!getGithubToken()) return;
-
-  const status = document.getElementById("contentFormStatus");
-  status.textContent = "";
-
-  let founderPhoto = document.getElementById("cf-founderPhotoCurrent").value;
-  const founderPhotoFile = document.getElementById("cf-founderPhotoFile").files[0];
-  if (founderPhotoFile) {
-    try {
-      status.textContent = "Envoi de la photo...";
-      founderPhoto = await uploadImageFile(founderPhotoFile, "founder");
-    } catch (err) {
-      status.textContent = "Erreur d'envoi de la photo : " + err.message;
-      return;
-    }
-  }
-
-  const updated = {
-    heroTagline: document.getElementById("cf-heroTagline").value.trim(),
-    servicesLine: document.getElementById("cf-servicesLine").value.trim(),
-    aboutText: document.getElementById("cf-aboutText").value.trim(),
-    contact: {
-      nom: document.getElementById("cf-contactNom").value.trim(),
-      adresse: document.getElementById("cf-contactAdresse").value.trim(),
-      telephone: document.getElementById("cf-contactTelephone").value.trim(),
-      email: document.getElementById("cf-contactEmail").value.trim(),
-    },
-    footerText: document.getElementById("cf-footerText").value.trim(),
-    logo: document.getElementById("cf-logo").value.trim(),
-    founder: {
-      photo: founderPhoto,
-      name: document.getElementById("cf-founderName").value.trim(),
-      title: document.getElementById("cf-founderTitle").value.trim(),
-    },
-  };
-
-  status.textContent = "Enregistrement...";
-
-  try {
-    const { sha } = await ghGetFile("content/site.json");
-    await ghPutFile("content/site.json", updated, "Mise à jour du contenu de la page", sha);
-    SITE_CONTENT = updated;
-    applySiteContent();
-    document.getElementById("contentFormModal").classList.remove("open");
-  } catch (err) {
-    status.textContent = "Erreur : " + err.message;
   }
 }
 

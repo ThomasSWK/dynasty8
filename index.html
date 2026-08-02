@@ -316,6 +316,45 @@
     border:2px solid var(--gold); box-shadow:0 0 30px rgba(201,162,39,0.2);
   }
   .founder-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold-light);font-weight:600;}
+  .founder-photo-placeholder{
+    width:150px;height:150px;border-radius:50%;border:2px dashed var(--line);
+    display:flex;align-items:center;justify-content:center;color:var(--cream-dim);
+    font-size:0.8rem;cursor:pointer;transition:border-color 0.2s,color 0.2s;
+  }
+  .founder-photo-placeholder:hover{border-color:var(--gold);color:var(--gold-light);}
+
+  /* ÉDITION EN DIRECT (admin) */
+  [contenteditable="true"]{
+    outline:none; border-radius:2px;
+    box-shadow:inset 0 -1px 0 0 rgba(201,162,39,0.35);
+    transition:box-shadow 0.2s;
+  }
+  [contenteditable="true"]:hover, [contenteditable="true"]:focus{
+    box-shadow:inset 0 -1px 0 0 var(--gold);
+    background:rgba(201,162,39,0.06);
+  }
+  [contenteditable="true"]:empty:before{content:attr(data-placeholder); opacity:0.4;}
+  .editable-img{
+    cursor:pointer; outline:2px dashed transparent; outline-offset:4px;
+    transition:outline-color 0.2s, opacity 0.2s;
+  }
+  .editable-img:hover{outline-color:var(--gold);}
+
+  .admin-save-bar{
+    position:fixed; left:0; right:0; bottom:0; z-index:150;
+    background:rgba(10,10,10,0.95); border-top:1px solid var(--gold);
+    padding:14px 5%; display:flex; align-items:center; justify-content:center;
+    gap:20px; flex-wrap:wrap;
+  }
+  .admin-save-bar span{font-size:0.8rem;color:var(--cream-dim);}
+  .admin-save-status{color:var(--gold-light) !important;min-width:120px;}
+  .admin-save-bar button{
+    background:var(--gold);color:var(--black);border:none;padding:10px 26px;
+    font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;
+    cursor:pointer;transition:0.2s;
+  }
+  .admin-save-bar button:hover{background:var(--gold-light);}
+  body.has-admin-bar{padding-bottom:64px;}
 
   /* CONTACT */
   .contact-grid{
@@ -410,7 +449,6 @@
     <p id="aboutTextEl">Chargement...</p>
     <div class="divider">◆</div>
     <div class="founder" id="founderBlock"></div>
-    <div id="editContentToolbar"></div>
   </div>
 </section>
 
@@ -466,6 +504,12 @@
       <p class="admin-error hidden" id="loginError">Mot de passe incorrect.</p>
     </form>
   </div>
+</div>
+
+<div class="admin-save-bar hidden" id="adminSaveBar">
+  <span>Mode édition — cliquez sur un texte ou une photo pour le modifier.</span>
+  <span class="admin-save-status" id="adminSaveStatus"></span>
+  <button type="button" id="saveContentBtn">Enregistrer les modifications</button>
 </div>
 
 <script src="assets/js/config.js"></script>

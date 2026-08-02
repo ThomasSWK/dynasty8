@@ -81,9 +81,9 @@ Pour que les modifications (biens, contenu de page) soient réellement enregistr
 ### 5. Utilisation au quotidien
 
 - Cliquez sur **🔒 Admin** dans le menu, entrez le mot de passe.
-- Section "Nos biens" : bouton **+ Ajouter un bien**, et icônes ✎ (modifier) / ✕ (supprimer) sur chaque fiche.
-- Section "L'agence" : bouton **Modifier le contenu** pour changer l'accroche, la présentation, les coordonnées de contact, le pied de page et le logo.
-- Chaque enregistrement crée un commit sur le dépôt GitHub ; le site se met à jour en quelques dizaines de secondes le temps que GitHub Pages redéploie.
+- Section "Nos biens" : bouton **+ Ajouter un bien**, et icônes ✎ (modifier) / ✕ (supprimer) sur chaque fiche (formulaire dédié).
+- Reste de la page (accroche, présentation, coordonnées, pied de page, logo, photo/nom/titre de la fondatrice) : **édition directe sur la page**. Une fois connecté, ces textes sont cliquables et modifiables sur place (contour doré au survol), et les photos (logo, fondatrice) se remplacent en cliquant dessus. Une barre **"Enregistrer les modifications"** reste affichée en bas de l'écran tant que vous êtes en mode édition — cliquez dessus une fois vos changements terminés pour tout enregistrer en un seul commit.
+- Chaque enregistrement (biens ou contenu) crée un commit sur le dépôt GitHub ; le site se met à jour en quelques dizaines de secondes le temps que GitHub Pages redéploie.
 
 ### 6. Tester en local avant de pousser
 
