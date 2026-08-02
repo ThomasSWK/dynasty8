@@ -172,21 +172,21 @@
       "id": "apartment-gtao-hi-1",
       "category": "Appartement",
       "transaction": "Location",
-      "title": "Apartment Gtao Hi 1",
+      "title": "METROPOLITAN",
       "priceRent": 1000,
       "priceSale": null,
       "pieces": "1",
-      "sdb": "",
-      "desc": "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+      "sdb": "1",
+      "desc": "Pensée pour ceux qui aiment vivre au rythme de la ville, cette gamme mêle parquet sombre, lignes contemporaines et touches rouges parfaitement dosées. Spacieuse, élégante et ouverte sur les lumières de Los Santos — difficile de redescendre sur terre après ça.",
       "images": [
-        "images/uploads/apartment-gtao-hi-1-01.jpg",
         "images/uploads/apartment-gtao-hi-1-02.jpg",
         "images/uploads/apartment-gtao-hi-1-03.jpg",
         "images/uploads/apartment-gtao-hi-1-04.jpg",
         "images/uploads/apartment-gtao-hi-1-05.jpg",
         "images/uploads/apartment-gtao-hi-1-06.jpg",
         "images/uploads/apartment-gtao-hi-1-07.jpg",
-        "images/uploads/apartment-gtao-hi-1-08.jpg"
+        "images/uploads/apartment-gtao-hi-1-08.jpg",
+        "images/uploads/apartment-gtao-hi-1-01.jpg"
       ]
     },
     {
