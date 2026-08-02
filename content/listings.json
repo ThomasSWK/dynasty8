@@ -25,21 +25,6 @@
       "images": [
         "https://i.ibb.co/BvvYPzQ/Capture-d-cran-2026-08-01-205330.png"
       ]
-    },
-    {
-      "id": "test-msc66zyu",
-      "category": "Entrepôt",
-      "transaction": "Vente",
-      "title": "test",
-      "location": "test",
-      "price": "test",
-      "surface": "test",
-      "pieces": "test",
-      "sdb": "test",
-      "desc": "test",
-      "images": [
-        "test"
-      ]
     }
   ]
 }
