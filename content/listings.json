@@ -243,12 +243,12 @@
       "id": "apartment-single-bedroom",
       "category": "Appartement",
       "transaction": "Location",
-      "title": "Apartment Single Bedroom",
+      "title": "MOTEL",
       "priceRent": 1000,
       "priceSale": null,
       "pieces": "1",
-      "sdb": "",
-      "desc": "Un appartement au style soigné, idéal pour une clientèle exigeante. Description complète à venir.",
+      "sdb": "0.5",
+      "desc": "Une chambre simple, fonctionnelle et délicieusement rétro, avec ses tons bleus, son mobilier sans prétention et sa salle d’eau compacte. Pas de marbre ni de jacuzzi ici : juste l’essentiel pour dormir tranquille… et repartir avant que la réception ne pose trop de questions.",
       "images": [
         "images/uploads/apartment-single-bedroom-01.jpg",
         "images/uploads/apartment-single-bedroom-02.jpg"
