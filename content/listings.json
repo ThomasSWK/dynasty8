@@ -317,17 +317,17 @@
       "id": "house-gtao-mid-1",
       "category": "Maison",
       "transaction": "Location",
-      "title": "House Gtao Mid 1",
+      "title": "HOMESTEAD",
       "priceRent": 1000,
       "priceSale": null,
       "pieces": "1",
-      "sdb": "",
-      "desc": "Une maison spacieuse et bien située. Description complète à venir.",
+      "sdb": "0.5",
+      "desc": "Un intérieur familial, chaleureux et sans prétention, où chaque objet semble avoir trouvé sa place au fil des années. Entre grand canapé, bibliothèque bien remplie et décoration légèrement désordonnée, la gamme HOMESTEAD offre un vrai chez-soi — pas un appartement témoin où personne n’ose s’asseoir.",
       "images": [
-        "images/uploads/house-gtao-mid-1-01.jpg",
+        "images/uploads/house-gtao-mid-1-04.jpg",
         "images/uploads/house-gtao-mid-1-02.jpg",
         "images/uploads/house-gtao-mid-1-03.jpg",
-        "images/uploads/house-gtao-mid-1-04.jpg"
+        "images/uploads/house-gtao-mid-1-01.jpg"
       ]
     },
     {
