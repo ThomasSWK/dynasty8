@@ -381,7 +381,7 @@
       "category": "Garage",
       "transaction": "Location",
       "title": "Garage 1",
-      "priceRent": 1000,
+      "priceRent": 2500,
       "priceSale": null,
       "pieces": "1",
       "sdb": "",
