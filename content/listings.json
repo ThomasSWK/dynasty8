@@ -497,26 +497,6 @@
         "images/uploads/garage-large-2-01.jpg",
         "images/uploads/garage-large-2-02.jpg"
       ]
-    },
-    {
-      "id": "garage-large-4",
-      "category": "Garage",
-      "transaction": "Location",
-      "title": "Garage Large 4",
-      "priceRent": 1000,
-      "priceSale": null,
-      "pieces": "1",
-      "sdb": "",
-      "desc": "Un espace sécurisé pour vos véhicules. Description complète à venir.",
-      "images": [
-        "images/uploads/garage-large-4-01.jpg",
-        "images/uploads/garage-large-4-02.jpg",
-        "images/uploads/garage-large-4-03.jpg",
-        "images/uploads/garage-large-4-04.jpg",
-        "images/uploads/garage-large-4-05.jpg",
-        "images/uploads/garage-large-4-06.jpg",
-        "images/uploads/garage-large-4-07.jpg"
-      ]
     }
   ]
 }
